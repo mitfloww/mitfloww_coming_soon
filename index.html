@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FileWall - Coming Soon</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, select, textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #6366f1;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4f46e5;
+    }
+
+    .success {
+      margin-top: 20px;
+      color: #22c55e;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>FileWall</h1>
+    <p>Get paid before delivering files. No more chasing clients.</p>
+
+    <form id="form">
+      <input type="email" id="email" placeholder="Your email" required />
+
+      <select id="role">
+        <option>Freelancer</option>
+        <option>Agency</option>
+        <option>Creator</option>
+      </select>
+
+      <textarea id="problem" placeholder="What's your biggest issue with clients?"></textarea>
+
+      <button type="submit">Join Waitlist</button>
+    </form>
+
+    <div class="success" id="success">
+      You're on the list 🚀
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("form");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        email: document.getElementById("email").value,
+        role: document.getElementById("role").value,
+        problem: document.getElementById("problem").value,
+      };
+
+      try {
+        await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+
+        form.style.display = "none";
+        success.style.display = "block";
+      } catch (err) {
+        alert("Something went wrong");
+      }
+    });
+  </script>
+
+</body>
+</html>
