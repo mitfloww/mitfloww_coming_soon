@@ -953,3 +953,12 @@ select {
     font-size: 1.5rem;
   }
 }
+
+.blog-page {
+  height: auto;
+  overflow: auto;
+}
+
+.blog-page .site-footer {
+  position: relative;
+}
