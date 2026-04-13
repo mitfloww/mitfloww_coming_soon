@@ -5,36 +5,26 @@
   <url>
     <loc>https://mitfloww.com/</loc>
     <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/</loc>
     <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/get-paid-before-delivery.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-04-10</lastmod>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/client-not-paying.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-04-10</lastmod>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/secure-file-sharing.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-04-10</lastmod>
   </url>
 
 </urlset>
