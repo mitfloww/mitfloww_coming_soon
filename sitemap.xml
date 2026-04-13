@@ -1,34 +1,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Main Page -->
   <url>
     <loc>https://mitfloww.com/</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
 
-  <!-- Blog Index -->
   <url>
-    <loc>https://mitfloww.com/blog/index.html</loc>
+    <loc>https://mitfloww.com/blog/</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
 
-  <!-- Blog Pages -->
   <url>
     <loc>https://mitfloww.com/blog/get-paid-before-delivery.html</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/client-not-paying.html</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
     <loc>https://mitfloww.com/blog/secure-file-sharing.html</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
