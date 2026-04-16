@@ -54,7 +54,7 @@ body {
 /* ─── BACKGROUND CONFIG ─── */
 .hero-section,
 .success-screen {
-  background-image: url('bgd.png');
+  background-image: url('/assets/bgd.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -826,7 +826,7 @@ select {
 
   .hero-section,
   .success-screen {
-    background-image: url('bgm.png');
+    background-image: url('/assets/bgm.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
