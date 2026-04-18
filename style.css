@@ -184,7 +184,7 @@ body {
 }
 
 .hero-icon {
-  height: 56px;
+  height: 80px;
   width: auto;
   margin-bottom: 24px;
 }
@@ -251,7 +251,7 @@ body {
 }
 
 .brand-logo {
-  max-height: 42px;
+  max-height: 64px;
   width: auto;
   display: block;
 }
