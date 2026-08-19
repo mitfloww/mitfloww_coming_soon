@@ -4,23 +4,29 @@
 
 :root {
   /* Brand */
-  --primary: #29ABE2;
-  --primary-hover: #2952C2;
-  --primary-light: rgba(55, 103, 234, 0.06);
-  --secondary: #5F78A3;
-  --neutral: #74777F;
+  --primary: #005BDD;
+  --primary-hover: #004AC6;
+  --primary-light: rgba(0, 91, 221, 0.08);
+  --secondary: #EC8D1B;
+  --neutral: #434655;
+  --accent: #00C7FF;
 
   /* Surface */
-  --bg: #FCFDFE;
+  --bg: #FFFFFF;
   /* very subtle background tone */
   --surface: #FFFFFF;
-  --border: #E5E7EB;
+  --border: #C3C6D7;
+  --line-soft: #EEF2F7;
   --border-focus: var(--primary);
 
   /* Text */
-  --text-main: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
+  --text-main: #191C1E;
+  --text-secondary: #434655;
+  --text-muted: #6F7383;
+
+  /* Typography */
+  --heading: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Misc */
   --radius-pill: 999px;
@@ -42,8 +48,17 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading);
+}
+
 body {
-  font-family: 'Inter', 'Manrope', system-ui, -apple-system, sans-serif;
+  font-family: var(--sans);
   background: var(--bg);
   color: var(--text-main);
   line-height: 1.5;
@@ -143,7 +158,7 @@ body {
 .blob-2 {
   width: 250px;
   height: 250px;
-  background: rgba(95, 120, 163, 0.1);
+  background: rgba(0, 199, 255, 0.12);
   bottom: 0;
   right: 0;
   animation-delay: -5s;
@@ -218,14 +233,14 @@ body {
   font-size: 1.125rem;
   padding: 16px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(55, 103, 234, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 91, 221, 0.2);
   transition: all 300ms ease;
   font-weight: 600;
 }
 
 .hero-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(55, 103, 234, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 91, 221, 0.3);
 }
 
 .hero-cta-subtext {
@@ -273,7 +288,7 @@ body {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #F3F4F6;
+  background: var(--line-soft);
   color: var(--text-muted);
   display: flex;
   align-items: center;
@@ -316,7 +331,7 @@ body {
 
 /* Completed filled state */
 .step-item.completed .step-marker {
-  background: #EBF1FF;
+  background: var(--primary-light);
   /* Lighter primary tint */
   color: var(--primary);
 }
@@ -324,13 +339,13 @@ body {
 .step-line {
   width: 2px;
   height: 48px;
-  background: #F3F4F6;
+  background: var(--line-soft);
   margin: 8px 0;
   transition: background var(--transition);
 }
 
 .step-item.completed .step-line {
-  background: #EBF1FF;
+  background: var(--primary-light);
 }
 
 /* ─── MAIN CONTENT ─── */
@@ -391,6 +406,7 @@ body {
 
 /* Step Typography */
 .question-title {
+  font-family: var(--heading);
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--text-main);
@@ -433,9 +449,9 @@ body {
 }
 
 .pill-label:hover {
-  border-color: #D1D5DB;
+  border-color: var(--line);
   color: var(--text-main);
-  background: #F9FAFB;
+  background: var(--line-soft);
 }
 
 .pill-label:active {
@@ -492,7 +508,7 @@ input[type="email"]:focus,
 input[type="text"]:focus,
 select:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(55, 103, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 199, 255, 0.16);
 }
 
 input[type="email"]::placeholder,
@@ -503,7 +519,7 @@ input[type="text"]::placeholder {
 select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236F7383' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 40px;
@@ -549,7 +565,7 @@ select {
 .btn-primary:hover:not(:disabled) {
   background: var(--primary-hover);
   /* Optional soft shadow */
-  box-shadow: 0 4px 14px rgba(55, 103, 234, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 91, 221, 0.25);
   transform: translateY(-1px);
 }
 
@@ -559,7 +575,7 @@ select {
 }
 
 .btn-ghost:hover:not(:disabled) {
-  background: #F3F4F6;
+  background: var(--line-soft);
   color: var(--text-main);
 }
 
