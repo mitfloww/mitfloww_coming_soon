@@ -5,7 +5,7 @@
 
   // Keep CTA links usable when the static page is opened directly from disk.
   if (window.location.protocol === "file:") {
-    document.querySelectorAll('a[href="/preregister"]').forEach(function (link) {
+    document.querySelectorAll('a[href="/preregister/"]').forEach(function (link) {
       link.setAttribute("href", "preregister/index.html");
     });
   }

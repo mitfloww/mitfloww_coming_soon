@@ -298,7 +298,7 @@ function showSuccess() {
 }
 
 // ─── REFERRAL LOGIC (MINIMAL) ───
-const shareText = `Tired of chasing clients for payment?\n\nThis tool makes them pay before accessing files:\nhttps://mitfloww.com`;
+const shareText = `Tired of chasing clients for payment?\n\nThis tool makes them pay before accessing files:\nhttps://www.mitfloww.com/`;
 
 const btnShareNative = document.getElementById("btnShareNative");
 if (btnShareNative) {
