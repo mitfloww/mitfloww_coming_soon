@@ -1,307 +1,875 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MitFloww - Get Paid Before You Deliver | The Controlled Delivery Workflow for Freelancers</title>
+  
+  <meta name="description" content="MitFloww gives freelancers and independent studios a controlled way to review, protect, and release valuable work. Prevent unpaid files and scope creep with bounded revisions and automated escrow.">
+  <meta name="keywords" content="freelance delivery workflow, get paid before delivering files, protect freelance work, safe file handoff, freelance escrow delivery, freelance payment protection, client file review tool, avoid non paying clients">
   <meta name="author" content="MitFloww">
-  <meta name="description" content="MitFloww gives freelancers a safer way to deliver valuable work: share files, protect access, and get paid before delivery.">
-  <link rel="canonical" href="https://www.mitfloww.com/">
-
-  <meta property="og:title" content="Get paid before you deliver | MitFloww">
-  <meta property="og:description" content="A controlled delivery workflow for freelancers. Share your work, protect access, and get paid before your client receives the files.">
-  <meta property="og:url" content="https://www.mitfloww.com/">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mitfloww.com/">
+  
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://www.mitfloww.com/og-image-v4.png">
+  <meta property="og:url" content="https://mitfloww.com/">
+  <meta property="og:title" content="MitFloww - Get Paid Before You Deliver">
+  <meta property="og:description" content="The controlled delivery workflow for freelancers. Review protected previews, bind revisions, and release final files only when payment clears.">
+  <meta property="og:image" content="https://mitfloww.com/og-image-v4.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="MitFloww">
+  
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Get paid before you deliver | MitFloww">
-  <meta name="twitter:description" content="Protect the work before it's delivered. MitFloww brings review, payment, revisions, and delivery into one workflow.">
-  <meta name="twitter:image" content="https://www.mitfloww.com/og-image-v4.png">
+  <meta name="twitter:title" content="MitFloww - Get Paid Before You Deliver">
+  <meta name="twitter:description" content="The controlled delivery workflow for freelancers. Protected previews, bounded revisions, and automated escrow release.">
+  <meta name="twitter:image" content="https://mitfloww.com/og-image-v4.png">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#005bdd">
 
-  <!-- Preserved search terms from the original public entry page -->
-  <meta name="keywords" content="
-    file sharing,
-    secure file sharing,
-    fast file sharing,
-    file transfer,
-    send large files,
-    video file sharing,
-    secure file transfer,
-    freelance file sharing,
-    file sharing with payment,
-    get paid before delivery,
-    send files after payment,
-    payment protected file sharing
-  ">
-
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2">
-  <link rel="icon" href="/favicon.ico?v=2">
-  <link rel="shortcut icon" href="/favicon.ico?v=2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-  <link rel="manifest" href="/site.webmanifest?v=2">
-  <meta name="apple-mobile-web-app-title" content="MitFloww">
-
+  <!-- Typography matching MitFloww Web Application: Manrope & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="landing.css">
 
-  <title>MitFloww — Get paid before you deliver</title>
-
+  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "MitFloww",
-    "alternateName": ["MitFlow"],
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "description": "A controlled file delivery workflow for freelancers with payment protection, limited revisions, and client approval.",
-    "url": "https://www.mitfloww.com/",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "creator": {
-      "@type": "Organization",
-      "name": "MitFloww"
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://mitfloww.com/#organization",
+        "name": "MitFloww",
+        "url": "https://mitfloww.com",
+        "logo": "https://mitfloww.com/assets/logo.svg",
+        "description": "The controlled delivery workflow for freelancers and independent creative studios."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mitfloww.com/#website",
+        "url": "https://mitfloww.com",
+        "name": "MitFloww",
+        "publisher": { "@id": "https://mitfloww.com/#organization" }
+      }
+    ]
   }
   </script>
 </head>
-<body class="landing-page">
-  <a class="skip-link" href="#main-content">Skip to content</a>
+<body>
 
-  <header class="site-header" data-header>
-    <div class="container nav-shell">
-      <a class="brand" href="/" aria-label="MitFloww home">
-        <img src="/assets/icon.png" alt="" width="34" height="20">
-        <span>MitFloww</span>
+  <!-- ==========================================================================
+       SECTION 1: Minimal Clean Navigation Bar
+       ========================================================================== -->
+  <header class="site-nav">
+    <div class="site-container site-nav-inner">
+      <a href="/" class="site-brand" aria-label="MitFloww Home">
+        <img src="assets/logo.svg" alt="MitFloww Logo" width="138" height="28">
       </a>
 
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#how-it-works">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#creators">For creators</a>
-        <a href="#security">Security</a>
+      <nav class="nav-links-center" aria-label="Main Navigation">
+        <a href="#workflow-story" class="nav-item-link">How it works</a>
+        <a href="#showcase-story" class="nav-item-link">Product</a>
+        <a href="#capabilities" class="nav-item-link">Capabilities</a>
+        <a href="#security" class="nav-item-link">Security</a>
       </nav>
 
-      <div class="nav-actions">
-        <a class="nav-quiet" href="/preregister/">Join early access</a>
-        <a class="button button-small button-blue" href="/preregister/">Get early access <span aria-hidden="true">↗</span></a>
+      <div class="nav-actions-right">
+        <a href="/login" class="nav-login-link">Log in</a>
+        <a href="/preregister/" class="btn-primary nav-cta-btn">Get early access</a>
       </div>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="sr-only">Open navigation</span>
-        <span></span><span></span>
+      <button id="mobile-menu-toggle" class="nav-mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
       </button>
     </div>
-    <div class="mobile-menu" id="mobile-menu" hidden>
-      <nav aria-label="Mobile navigation">
-        <a href="#how-it-works">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#creators">For creators</a>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="mobile-nav-drawer">
+      <nav class="mobile-nav-links" aria-label="Mobile Navigation">
+        <a href="#workflow-story">How it works</a>
+        <a href="#showcase-story">Product</a>
+        <a href="#capabilities">Capabilities</a>
         <a href="#security">Security</a>
-        <a class="button button-blue" href="/preregister/">Get early access <span aria-hidden="true">↗</span></a>
+        <a href="/login">Log in</a>
+        <a href="/preregister/" class="btn-primary" style="margin-top: 12px; width: 100%;">Get early access</a>
       </nav>
     </div>
   </header>
 
-  <main id="main-content">
-    <section class="hero section-grid" aria-labelledby="hero-title">
-      <div class="hero-glow hero-glow-left" aria-hidden="true"></div>
-      <div class="hero-copy container reveal">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> A safer way to deliver freelance work</div>
-        <h1 id="hero-title">Get paid<br><em>before</em> you deliver.</h1>
-        <p class="hero-lede">MitFloww gives freelancers a controlled way to share valuable work, protect access, and get paid before the final files are released.</p>
-        <div class="hero-actions">
-          <a class="button button-blue button-large" href="/preregister/">Get early access <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a>
+  <!-- ==========================================================================
+       SECTION 2: HERO — Real MitFloww Product Visual is the Hero
+       ========================================================================== -->
+  <section id="hero-section" class="hero-viewport">
+    <div class="site-container">
+      <div class="hero-copy-block">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          THE CONTROLLED DELIVERY WORKFLOW
         </div>
-        <p class="microcopy"><span class="microcopy-mark">✓</span> Early access <span aria-hidden="true">·</span> Takes less than a minute</p>
+        <h1 class="hero-headline">
+          Get paid<br>
+          <span class="hero-headline-accent">before you deliver.</span>
+        </h1>
+        <p class="hero-subtext">
+          MitFloww gives freelancers a controlled way to review, protect, and release valuable work.
+        </p>
+        <div class="hero-ctas">
+          <a href="/preregister/" class="btn-primary">
+            Get early access
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="#workflow-story" class="btn-secondary">
+            See how it works
+            <i data-lucide="chevron-down"></i>
+          </a>
+        </div>
       </div>
 
-      <div class="hero-visual-wrap reveal reveal-delay-1" role="img" aria-label="MitFloww delivery workflow preview showing protected files, client review, and payment status">
-        <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-        <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-        <div class="hero-visual-shadow" aria-hidden="true"></div>
-        <div class="delivery-window product-window">
-          <div class="window-topbar">
-            <div class="window-dots"><span></span><span></span><span></span></div>
-            <div class="window-label">MITFLOWW <span>/</span> PROJECT PAGE</div>
-            <div class="window-menu">•••</div>
-          </div>
-          <div class="delivery-body">
-            <div class="delivery-heading">
-              <div>
-                <p class="ui-kicker">Project delivery</p>
-                <div class="ui-project-title">Brand identity project</div>
-                <p class="ui-muted">Prepared for client review</p>
-              </div>
-              <div class="status-chip status-ready"><span></span> Ready to send</div>
+      <!-- Real Product Visual with Subtle Physical Perspective Depth -->
+      <div class="hero-stage-perspective">
+        <div id="hero-product-stage" class="hero-product-stage">
+          
+          <!-- Top Window Chrome mimicking real MitFloww app -->
+          <div class="app-window-chrome">
+            <div class="chrome-window-dots">
+              <span class="chrome-dot-circle"></span>
+              <span class="chrome-dot-circle"></span>
+              <span class="chrome-dot-circle"></span>
             </div>
-            <div class="delivery-summary">
-              <div class="summary-cell"><span class="summary-label">Files</span><strong>08</strong><small>1.8 GB</small></div>
-              <div class="summary-cell"><span class="summary-label">Revisions</span><strong>2 / 3</strong><small>used</small></div>
-              <div class="summary-cell"><span class="summary-label">Access</span><strong>Locked</strong><small>until paid</small></div>
+            <div class="chrome-window-title">
+              <i data-lucide="folder"></i>
+              <span>mitfloww.com/s/nordic-brand-identity</span>
             </div>
-            <div class="delivery-progress">
-              <div class="progress-line"><span></span></div>
-              <div class="progress-stages">
-                <div class="progress-stage done"><span class="stage-icon">✓</span><span>Files ready</span></div>
-                <div class="progress-stage done"><span class="stage-icon">✓</span><span>Client review</span></div>
-                <div class="progress-stage active"><span class="stage-icon lock-icon">⌑</span><span>Payment required</span></div>
-              </div>
+            <div class="chrome-window-tag">
+              <i data-lucide="shield-check"></i>
+              <span>256-bit Protected</span>
             </div>
-            <div class="file-list">
-              <div class="file-row"><span class="file-type file-video">MP4</span><div><strong>Brand-film-final.mp4</strong><small>01:42 · Preview available</small></div><span class="file-state">Protected</span></div>
-              <div class="file-row"><span class="file-type file-folder">ZIP</span><div><strong>Campaign-assets.zip</strong><small>1.2 GB · 24 items</small></div><span class="file-state">Protected</span></div>
-              <div class="file-row"><span class="file-type file-pdf">PDF</span><div><strong>Usage-notes.pdf</strong><small>2.4 MB · Ready</small></div><span class="file-state">Protected</span></div>
+          </div>
+
+          <!-- Real Product Screenshot Viewport -->
+          <div class="hero-screenshot-viewport">
+            <img 
+              id="hero-screenshot-img" 
+              class="hero-screenshot-img" 
+              src="assets/ui-stage-review.webp" 
+              alt="Real MitFloww In-Canvas Review and Delivery Protection Interface" 
+              width="1400" 
+              height="900"
+              loading="eager"
+            >
+
+            <!-- Dynamic Spatial Annotation Pin directly on deliverable -->
+            <div class="hero-live-pin" title="Spatial pin #1">1</div>
+            <div class="hero-live-callout">
+              <span class="hero-live-callout-badge">Revision 1</span>
+              <span>"Adjust logo margins to align with baseline grid"</span>
             </div>
-            <div class="delivery-footer"><span><i class="avatar-dot"></i> Client approval pending</span><button type="button" disabled>Send secure link <span aria-hidden="true">→</span></button></div>
+
+            <!-- Watermark Overlay indicating stream-only preview -->
+            <div class="hero-watermark-ribbon">
+              <div class="watermark-stamp">Protected Preview · MitFloww</div>
+            </div>
           </div>
-        </div>
-        <div class="floating-note note-payment"><span class="note-icon">$</span><span><b>Payment protection</b><small>Access stays controlled</small></span></div>
-        <div class="floating-note note-revision"><span class="note-check">✓</span><span><b>Revision control</b><small>2 of 3 used</small></span></div>
-      </div>
-    </section>
 
-    <section class="proof-strip" aria-label="MitFloww principles">
-      <div class="container proof-items">
-        <span>For independent creators</span><i></i><span>Payment before access</span><i></i><span>Review in one workflow</span><i></i><span>Delivery on your terms</span>
-      </div>
-    </section>
+          <!-- Bottom Window Footer Status Bar -->
+          <div class="app-window-footer">
+            <div class="footer-stage-indicator">
+              <i data-lucide="lock"></i>
+              <span>Stage: Files Prepared &amp; Protected</span>
+              <span class="footer-stage-sub">· Client receives stream-only preview</span>
+            </div>
+            <a href="#workflow-story" class="btn-ghost">
+              Explore the workflow
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
 
-    <section class="problem-section section-dark" id="problem" aria-labelledby="problem-title">
-      <div class="container problem-layout">
-        <div class="problem-heading reveal">
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> The familiar part of freelance work</p>
-          <h2 id="problem-title">The work is finished.<br><em>The payment shouldn't be a guessing game.</em></h2>
-        </div>
-        <div class="problem-copy reveal reveal-delay-1">
-          <p>Sending the final files is often the moment control disappears. You deliver, follow up, wait, and hope the transaction moves forward.</p>
-          <div class="quote-card"><span class="quote-mark">“</span><p>I'll pay you once I receive everything.</p><small>A workflow built on uncertainty</small></div>
         </div>
       </div>
-      <div class="container friction-row reveal reveal-delay-2">
-        <div class="friction-item"><span class="friction-number">01</span><strong>Send the work</strong><span>Before payment is confirmed</span></div>
-        <div class="friction-arrow" aria-hidden="true">→</div>
-        <div class="friction-item"><span class="friction-number">02</span><strong>Follow up</strong><span>After the files are already out</span></div>
-        <div class="friction-arrow" aria-hidden="true">→</div>
-        <div class="friction-item"><span class="friction-number">03</span><strong>Lose visibility</strong><span>Into the delivery and revisions</span></div>
-      </div>
-    </section>
-
-    <section class="how-section section-light" id="how-it-works" aria-labelledby="how-title">
-      <div class="container section-heading center-heading reveal">
-        <p class="eyebrow"><span class="eyebrow-dot"></span> One clear delivery path</p>
-        <h2 id="how-title">A better handoff,<br><em>from ready to released.</em></h2>
-        <p>MitFloww keeps review, payment, revisions, and access connected around one secure project link.</p>
-      </div>
-      <div class="container workflow-steps">
-        <article class="workflow-step reveal">
-          <div class="step-number">01</div><div class="step-line"></div>
-          <div class="step-visual step-visual-upload">
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 18V5M6.5 10.5 12 5l5.5 5.5M5 20h14" /></svg></span>
-            <small>READY</small>
-          </div>
-          <h3>Prepare the delivery</h3><p>Bring the final files together and set the boundaries for the project.</p>
-        </article>
-        <article class="workflow-step reveal reveal-delay-1">
-          <div class="step-number">02</div><div class="step-line"></div>
-          <div class="step-visual step-visual-link">
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9.5 14.5 5-5M7.2 16.8l-1.1 1.1a3.6 3.6 0 0 1-5.1-5.1l3.2-3.2a3.6 3.6 0 0 1 5.1 0M16.8 7.2l1.1-1.1a3.6 3.6 0 0 1 5.1 5.1l-3.2 3.2a3.6 3.6 0 0 1-5.1 0" /></svg></span>
-            <small>REVIEW</small>
-          </div>
-          <h3>Send it for review</h3><p>Give your client a clear place to review the work without releasing everything.</p>
-        </article>
-        <article class="workflow-step reveal reveal-delay-2">
-          <div class="step-number">03</div><div class="step-line"></div>
-          <div class="step-visual step-visual-payment">
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" /><path d="M12 7v10M14.8 9.2c-.5-.8-1.3-1.2-2.7-1.2-1.6 0-2.6.8-2.6 2 0 2.8 5.3 1.5 5.3 4.2 0 1.2-1 2-2.8 2-1.4 0-2.4-.5-3-1.3" /></svg></span>
-            <small>PAID</small>
-          </div>
-          <h3>Get paid</h3><p>Payment is confirmed before protected files become accessible.</p>
-        </article>
-        <article class="workflow-step reveal reveal-delay-3">
-          <div class="step-number">04</div>
-          <div class="step-visual step-visual-release">
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6.5 3.5h7.8l3.2 3.2v13.8h-11zM14 3.5v4h3.5M8.8 15.2l2 2 4.4-4.4" /></svg></span>
-            <small>AVAILABLE</small>
-          </div>
-          <h3>Release with confidence</h3><p>Finish the handoff with revisions and client approval in view.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="features-section section-tint" id="features" aria-labelledby="features-title">
-      <div class="container section-heading split-heading reveal">
-        <div><p class="eyebrow"><span class="eyebrow-dot"></span> Built around the handoff</p><h2 id="features-title">The parts of delivery<br><em>that matter most.</em></h2></div>
-        <p>MitFloww is not another place to store files. It gives valuable freelance work a more deliberate path to the client.</p>
-      </div>
-      <div class="container feature-stack">
-        <article class="feature-card feature-payment reveal">
-          <div class="feature-copy"><span class="feature-index">01 / PAYMENT PROTECTION</span><h3>Stop delivering valuable work on trust alone.</h3><p>Keep access controlled until the transaction is ready. Everyone gets a clearer next step, and your final files stay protected in the meantime.</p><a class="text-link" href="/preregister/">Join early access <span aria-hidden="true">↗</span></a></div>
-          <div class="feature-art payment-art"><div class="payment-card"><span class="mini-label">Delivery status</span><strong>Payment required</strong><div class="payment-track"><span></span></div><div class="payment-row"><span>Files</span><b>Protected</b></div><div class="payment-row"><span>Access</span><b class="gold-text">Waiting for payment</b></div></div><div class="payment-pill"><span>○</span> Payment confirmed <b>→</b></div></div>
-        </article>
-        <article class="feature-card feature-review reveal">
-          <div class="feature-copy"><span class="feature-index">02 / REVISION CONTROL</span><h3>Keep the review inside the workflow.</h3><p>Make the scope visible with a defined revision allowance and a shared approval state. Less ambiguity for you, and a better review experience for your client.</p><a class="text-link" href="#creators">See who it's for <span aria-hidden="true">↓</span></a></div>
-          <div class="feature-art revision-art"><div class="revision-board"><div class="board-head"><span>Brand film — review</span><span class="board-status">In review</span></div><div class="revision-row active"><span class="revision-num">V2</span><div><b>Color and pacing pass</b><small>Requested changes</small></div><span class="revision-state">Current</span></div><div class="revision-row"><span class="revision-num">V1</span><div><b>First cut</b><small>Superseded</small></div><span class="revision-state muted">Archived</span></div><div class="revision-count"><span>Revision allowance</span><strong>2 <small>/ 3 used</small></strong></div></div></div>
-        </article>
-        <article class="feature-card feature-delivery reveal">
-          <div class="feature-copy"><span class="feature-index">03 / SECURE DELIVERY</span><h3>One link for review, payment, and release.</h3><p>Send large creative projects through a single controlled handoff. Your client sees what is ready, what needs approval, and what happens next.</p><a class="text-link" href="#security">How MitFloww protects the handoff <span aria-hidden="true">↓</span></a></div>
-          <div class="feature-art delivery-art"><div class="delivery-map"><div class="map-node map-start"><span>01</span><b>Project</b><small>Files ready</small></div><div class="map-connector"><div class="map-lock" role="img" aria-label="Protected delivery"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="10" width="15" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"></path></svg></div></div><div class="map-node map-end"><span>02</span><b>Client</b><small>Review link</small></div></div><div class="map-caption">Access follows the workflow <span>↗</span></div></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="creators-section section-light" id="creators" aria-labelledby="creators-title">
-      <div class="container creators-layout">
-        <div class="creators-heading reveal"><p class="eyebrow"><span class="eyebrow-dot"></span> Made for valuable digital work</p><h2 id="creators-title">For the people<br><em>who make the work.</em></h2><p>Designers, developers, editors, photographers, and small creative teams deserve a delivery workflow that respects the value of what they create.</p></div>
-        <div class="creator-grid reveal reveal-delay-1">
-          <div class="creator-tile tile-blue"><span class="tile-art tile-shape-design"></span><strong>Designers</strong><small>Projects with a point of view</small><span class="tile-arrow">↗</span></div>
-          <div class="creator-tile tile-navy"><span class="tile-art tile-shape-code">&lt;/&gt;</span><strong>Developers</strong><small>Builds ready to ship</small><span class="tile-arrow">↗</span></div>
-          <div class="creator-tile tile-cyan"><span class="tile-art tile-shape-video"><i></i><i></i><i></i></span><strong>Video editors</strong><small>Large files, clear approvals</small><span class="tile-arrow">↗</span></div>
-          <div class="creator-tile tile-cream"><span class="tile-art tile-shape-photo"></span><strong>Creative teams</strong><small>One handoff, shared context</small><span class="tile-arrow">↗</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="security-section section-dark" id="security" aria-labelledby="security-title">
-      <div class="security-grid" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      <div class="container security-layout">
-        <div class="security-art reveal"><div class="security-ring ring-one"></div><div class="security-ring ring-two"></div><div class="security-lock"><span>⌑</span><small>CONTROLLED<br>ACCESS</small></div><div class="security-label label-top">YOUR WORK</div><div class="security-label label-bottom">YOUR TERMS</div></div>
-        <div class="security-copy reveal reveal-delay-1"><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> The principle behind MitFloww</p><h2 id="security-title">Your work stays yours<br><em>until you're ready to release it.</em></h2><p>MitFloww is built around controlled access. Payment protection, protected links, and a visible review process help make the handoff clearer for everyone involved.</p><div class="security-points"><div><span>01</span><b>Protected access</b><small>Files stay controlled while the delivery is in progress.</small></div><div><span>02</span><b>Clear approval states</b><small>Keep review and release decisions visible in one place.</small></div></div></div>
-      </div>
-    </section>
-
-    <section class="compare-section section-light" aria-labelledby="compare-title">
-      <div class="container section-heading center-heading reveal"><p class="eyebrow"><span class="eyebrow-dot"></span> The difference is the workflow</p><h2 id="compare-title">From sending files<br><em>to finishing the delivery.</em></h2></div>
-      <div class="container compare-grid reveal reveal-delay-1">
-        <div class="compare-column compare-before"><div class="compare-label"><span class="compare-icon">—</span> Without a controlled handoff</div><div class="compare-list"><span>Finish the project</span><span>Export the files</span><span>Send everything</span><span>Follow up on payment</span><span>Wonder what happens next</span></div></div>
-        <div class="compare-divider" aria-hidden="true"><span>→</span></div>
-        <div class="compare-column compare-after"><div class="compare-label"><span class="compare-icon">✓</span> With MitFloww</div><div class="compare-list"><span>Prepare the delivery</span><span>Share one secure link</span><span>Client reviews the work</span><span>Payment is confirmed</span><span>Release and complete</span></div></div>
-      </div>
-    </section>
-
-    <section class="final-cta section-blue" aria-labelledby="final-title">
-      <div class="final-grid" aria-hidden="true"></div>
-      <div class="container final-content reveal"><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> A better way to deliver</p><h2 id="final-title">Your work deserves<br><em>a safer handoff.</em></h2><p>Protect the work before it's delivered. Join the early access list and help shape the workflow independent creators actually need.</p><a class="button button-white button-large" href="/preregister/">Get early access <span aria-hidden="true">↗</span></a></div>
-    </section>
-  </main>
-
-  <footer class="landing-footer">
-    <div class="container footer-main">
-      <div class="footer-brand"><a class="brand" href="/" aria-label="MitFloww home"><img src="/assets/icon.png" alt="" width="34" height="20"><span>MitFloww</span></a><p>A safer way to deliver valuable freelance work.</p></div>
-      <div class="footer-links"><div><span>Product</span><a href="#how-it-works">How it works</a><a href="#features">Features</a><a href="#security">Security</a></div><div><span>Resources</span><a href="/blog/">Blog</a><a href="/what-is-mitfloww.html">About MitFloww</a><a href="/mitfloww-review.html">Review</a></div><div><span>Get started</span><a href="/preregister/">Early access</a><a href="/preregister/">Existing waitlist flow</a></div></div>
     </div>
-    <div class="container footer-bottom"><span>© 2026 MitFloww. All rights reserved.</span><span>Built for the work behind the work.</span></div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: THE PROBLEM — Editorial, High-Contrast (No 4 Cards)
+       ========================================================================== -->
+  <section class="problem-editorial-section">
+    <div class="site-container">
+      <div class="problem-editorial-layout">
+        <div class="problem-editorial-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            THE VULNERABLE MOMENT
+          </div>
+          <h2>Finished work shouldn't mean giving up control.</h2>
+          <p>
+            Sending high-value files over email or cloud links forces freelancers to surrender leverage before payment arrives. MitFloww replaces blind trust with an automated, respectful handoff.
+          </p>
+          <a href="/preregister/" class="btn-primary">
+            Protect your next project
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Single Continuous Comparison Track (No 4 cards!) -->
+        <div class="handoff-comparison-flow">
+          <div class="flow-comparison-item is-broken">
+            <div class="flow-item-header broken-header">
+              <i data-lucide="alert-triangle"></i>
+              <span>The Broken Traditional Way</span>
+            </div>
+            <div class="flow-steps-track">
+              <span>Send raw files</span>
+              <span class="flow-step-arrow">→</span>
+              <span>Wait indefinitely</span>
+              <span class="flow-step-arrow">→</span>
+              <span>Awkward follow-ups</span>
+              <span class="flow-step-arrow">→</span>
+              <span style="color: var(--app-destructive);">Hope payment arrives</span>
+            </div>
+          </div>
+
+          <div class="flow-comparison-item is-mitfloww">
+            <div class="flow-item-header mitfloww-header">
+              <i data-lucide="shield-check"></i>
+              <span>The MitFloww Controlled Standard</span>
+            </div>
+            <div class="flow-steps-track">
+              <span>Prepare</span>
+              <span class="flow-step-arrow">→</span>
+              <span>Protected Review</span>
+              <span class="flow-step-arrow">→</span>
+              <span>Escrow Payment</span>
+              <span class="flow-step-arrow">→</span>
+              <span style="color: var(--app-primary);">Automated Release</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: THE WORKFLOW — STICKY SCROLL-SCRUBBED STORYTELLING
+       Tall scroll container where scroll position continuously controls product state
+       ========================================================================== -->
+  <section id="workflow-story" class="workflow-scrub-track">
+    <div id="workflow-track" class="workflow-sticky-viewport">
+      <div class="site-container">
+        
+        <div class="workflow-story-layout">
+          <!-- Left Column: Storyline with Continuous Scroll Progress Indicator -->
+          <div class="workflow-story-sidebar">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              THE CONTROLLED HANDOFF
+            </div>
+            <h2 class="section-title-huge" style="margin-bottom: 24px; font-size: clamp(32px, 3.8vw, 48px);">One controlled<br>handoff.</h2>
+
+            <div class="workflow-stage-timeline">
+              <div id="workflow-progress-bar" class="workflow-timeline-progress-bar"></div>
+
+              <!-- Stage 1 -->
+              <div class="stage-narrative-step is-active" data-narrative-step="0">
+                <span class="stage-step-num">01 / PREPARE</span>
+                <h3 class="stage-step-title">Files are ready.</h3>
+                <p class="stage-step-desc">
+                  Upload video masters, high-res designs, PDFs, or archives. MitFloww encrypts raw files and generates watermarked streaming previews automatically.
+                </p>
+              </div>
+
+              <!-- Stage 2 -->
+              <div class="stage-narrative-step" data-narrative-step="1">
+                <span class="stage-step-num">02 / REVIEW</span>
+                <h3 class="stage-step-title">Client sees protected previews.</h3>
+                <p class="stage-step-desc">
+                  Clients drop frame-accurate comments directly on watermarked previews within agreed revision bounds. No raw custody is surrendered.
+                </p>
+              </div>
+
+              <!-- Stage 3 -->
+              <div class="stage-narrative-step" data-narrative-step="2">
+                <span class="stage-step-num">03 / PAYMENT</span>
+                <h3 class="stage-step-title">Payment is confirmed.</h3>
+                <p class="stage-step-desc">
+                  Clients settle invoices directly on the project page via Stripe Connect or bank transfer before master decryption occurs.
+                </p>
+              </div>
+
+              <!-- Stage 4 -->
+              <div class="stage-narrative-step" data-narrative-step="3">
+                <span class="stage-step-num">04 / RELEASE</span>
+                <h3 class="stage-step-title">Full files become available.</h3>
+                <p class="stage-step-desc">
+                  The exact moment settlement is verified by webhook, watermarks dissolve and time-limited, signed download URLs unlock automatically.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Pinned Real Product Visual Transforming with Scroll -->
+          <div class="workflow-stage-display">
+            <!-- Window Topbar -->
+            <div class="app-window-chrome">
+              <div class="chrome-window-dots">
+                <span class="chrome-dot-circle"></span>
+                <span class="chrome-dot-circle"></span>
+                <span class="chrome-dot-circle"></span>
+              </div>
+              <div class="chrome-window-title">
+                <i data-lucide="file-video"></i>
+                <span>Brand_Master_Deliverable.mov</span>
+              </div>
+              <div class="chrome-window-tag">
+                <i data-lucide="shield-alert"></i>
+                <span>Protected Access</span>
+              </div>
+            </div>
+
+            <!-- Viewport with Real Screenshot -->
+            <div class="workflow-visual-canvas">
+              <img 
+                id="workflow-canvas-img" 
+                class="workflow-canvas-img" 
+                src="assets/ui-stage-prepare.webp" 
+                alt="MitFloww Workflow Transformation Display" 
+                width="1400" 
+                height="900"
+                data-stage="0"
+              >
+
+              <!-- State 1 Overlay: Encrypting & Preparing -->
+              <div id="overlay-state-prepare" class="scrub-overlay-layer overlay-state-prepare is-visible">
+                <div class="state-badge-pill">
+                  <i data-lucide="lock"></i>
+                  <span>Master Files Encrypted at Rest</span>
+                </div>
+              </div>
+
+              <!-- State 2 Overlay: In-Canvas Review -->
+              <div id="overlay-state-review" class="scrub-overlay-layer overlay-state-review">
+                <div class="hero-live-pin" style="top: 25%; left: 30%;">1</div>
+                <div class="hero-live-callout" style="top: 23%; left: calc(30% + 40px);">
+                  <span class="hero-live-callout-badge">In Scope</span>
+                  <span>Frame 02:44 · "Color grade confirmed"</span>
+                </div>
+                <div class="hero-watermark-ribbon">
+                  <div class="watermark-stamp">Protected Client Stream</div>
+                </div>
+              </div>
+
+              <!-- State 3 Overlay: Escrow Settlement Modal -->
+              <div id="overlay-state-payment" class="scrub-overlay-layer overlay-state-payment">
+                <div class="payment-escrow-card">
+                  <div class="escrow-card-header">
+                    <div>
+                      <span style="font-size: 12px; font-family: var(--font-mono); color: var(--app-muted);">ESCROW CHECKOUT</span>
+                      <h4 style="font-size: 18px; font-weight: 700;">Nordic Studio Deliverables</h4>
+                    </div>
+                    <div class="escrow-amount-tag">$1,800.00</div>
+                  </div>
+                  <div class="escrow-details-row">
+                    <span>Project Contract Total</span>
+                    <span>$2,400.00</span>
+                  </div>
+                  <div class="escrow-details-row">
+                    <span>Retainer Applied</span>
+                    <span>-$600.00</span>
+                  </div>
+                  <div class="escrow-details-row total-row">
+                    <span>Balance Due to Release Masters</span>
+                    <span style="color: var(--app-primary);">$1,800.00</span>
+                  </div>
+                  <button class="btn-primary" style="width: 100%; margin-top: 20px;">
+                    <i data-lucide="credit-card"></i>
+                    Pay &amp; Unlock Deliverables
+                  </button>
+                </div>
+              </div>
+
+              <!-- State 4 Overlay: Unlocked Release -->
+              <div id="overlay-state-release" class="scrub-overlay-layer overlay-state-release">
+                <div class="release-unlocked-card">
+                  <div class="release-check-icon">
+                    <i data-lucide="check" style="width: 28px; height: 28px;"></i>
+                  </div>
+                  <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Settlement Confirmed</h4>
+                  <p style="font-size: 14px; color: var(--app-sub-text); margin-bottom: 20px;">
+                    Master files unsealed with 256-bit ephemeral download tokens. Watermark dissolved.
+                  </p>
+                  <button class="btn-primary" style="width: 100%; background-color: var(--app-status-paid);">
+                    <i data-lucide="download"></i>
+                    Download All Master Deliverables (1.4 GB)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Window Bottom Status Bar -->
+            <div class="app-window-footer">
+              <div id="workflow-stage-status-text" class="footer-stage-indicator">
+                01 / Prepare: Raw master files encrypted at rest.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: CUSTOM MITFLOWW MOTION ARCHITECTURE ENGINE
+       Continuous 60fps interactive visualization of custody, encryption, and release
+       ========================================================================== -->
+  <section class="cinematic-video-section">
+    <div class="site-container">
+      <div class="video-heading-wrap">
+        <div class="eyebrow" style="color: #7dd3fc;">
+          <span class="eyebrow-dot" style="background-color: #38bdf8;"></span>
+          ENGINEERED FOR PRODUCTION
+        </div>
+        <h2>Engineered for the final mile.</h2>
+        <p>A continuous, protected handoff built for high-value client production.</p>
+      </div>
+
+      <div class="video-player-container">
+        <!-- Interactive 60fps MitFloww Motion Architecture Engine -->
+        <canvas id="mitfloww-motion-canvas" class="cinematic-canvas-element" width="1280" height="720"></canvas>
+
+        <div class="video-control-bar">
+          <div class="motion-stage-pills">
+            <button class="motion-pill is-active" data-phase="0">01 / Ingest</button>
+            <button class="motion-pill" data-phase="1">02 / Encrypt</button>
+            <button class="motion-pill" data-phase="2">03 / Watermark</button>
+            <button class="motion-pill" data-phase="3">04 / Escrow</button>
+            <button class="motion-pill" data-phase="4">05 / Release</button>
+          </div>
+          <button id="cinematic-video-toggle" class="video-ctrl-btn" aria-label="Toggle Motion Animation">
+            <i data-lucide="pause"></i>
+            <span>Pause Motion</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 6: REAL PRODUCT SHOWCASE — Interactive Editorial Explorer
+       Spacious, authentic, non-trapping tabbed exploration of genuine MitFloww screens
+       ========================================================================== -->
+  <section id="showcase-story" class="showcase-editorial-section">
+    <div class="site-container">
+      
+      <div class="showcase-content-grid">
+        <!-- Left triggers -->
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            AUTHENTIC APPLICATION UI
+          </div>
+          <h2 class="section-title-huge" style="font-size: clamp(32px, 4.5vw, 52px);">
+            Everything around the handoff, in one place.
+          </h2>
+          <p class="section-desc-lead" style="margin-bottom: 32px; font-size: 16px;">
+            Inspect the genuine MitFloww screens built to safeguard valuable digital deliveries.
+          </p>
+
+          <div class="showcase-narrative-tabs">
+            <button class="showcase-tab-trigger is-active" data-showcase-tab="0">
+              <h3>01. Precise Spatial Feedback</h3>
+              <p>Pin comments directly on frames, video timelines, and design coordinates with bounded quotas.</p>
+            </button>
+
+            <button class="showcase-tab-trigger" data-showcase-tab="1">
+              <h3>02. Streamed Watermarked Previews</h3>
+              <p>Allow clients to verify full-resolution master quality without giving away custody of raw files.</p>
+            </button>
+
+            <button class="showcase-tab-trigger" data-showcase-tab="2">
+              <h3>03. Automated Escrow Release</h3>
+              <p>Direct invoice settlement verification unlocks encrypted signed download URLs instantly.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Authentic Product UI Frame -->
+        <div class="showcase-visual-frame">
+          <div class="app-window-chrome">
+            <div class="chrome-window-dots">
+              <span class="chrome-dot-circle"></span>
+              <span class="chrome-dot-circle"></span>
+              <span class="chrome-dot-circle"></span>
+            </div>
+            <div id="showcase-window-title" class="chrome-window-title">
+              <i data-lucide="monitor"></i>
+              <span>In-Canvas Review · Spatial Annotations Active</span>
+            </div>
+            <div id="showcase-window-tag" class="chrome-window-tag">
+              <i data-lucide="shield-check"></i>
+              <span>Live Revision Mode</span>
+            </div>
+          </div>
+          <img 
+            id="showcase-current-img" 
+            src="assets/ui-stage-review.webp" 
+            alt="Real MitFloww Interface Showcase" 
+            width="1400" 
+            height="900"
+            data-current-index="0"
+          >
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 7: MAJOR CAPABILITIES — Only Major Features (No Card Clutter)
+       ========================================================================== -->
+  <section id="capabilities" class="capabilities-editorial-section">
+    <div class="site-container">
+      
+      <!-- Capability 1: Payment Protection -->
+      <div class="capability-editorial-row">
+        <div class="capability-text-side">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            PAYMENT PROTECTION
+          </div>
+          <h3>Keep final files controlled until payment.</h3>
+          <p>
+            Clients can inspect high-resolution previews, test video timelines, and verify every deliverable. But high-res raw assets, vector sources, and production archives stay encrypted until the invoice clears.
+          </p>
+          <ul class="capability-specs-list">
+            <li>
+              <i data-lucide="check"></i>
+              <span>Automatic escrow unlock on verified settlement</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Zero third-party accounts or logins required for the client</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Direct creator payouts via Stripe Connect</span>
+            </li>
+          </ul>
+        </div>
+        <div class="capability-visual-side">
+          <img src="assets/ui-stage-payment.webp" alt="MitFloww Payment Protection Screen" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Capability 2: Revision Control (Reversed Layout) -->
+      <div class="capability-editorial-row is-reversed">
+        <div class="capability-text-side">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            REVISION CONTROL
+          </div>
+          <h3>Keep review and revision state visible.</h3>
+          <p>
+            Define your agreed revision allowance upfront (e.g. 2 rounds included). Revisions are logged with exact visual pins and timestamps. Once the quota is reached, new rounds trigger billable change requests automatically.
+          </p>
+          <ul class="capability-specs-list">
+            <li>
+              <i data-lucide="check"></i>
+              <span>Frame-accurate visual pins directly on canvas</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Explicit client approval sign-off on each milestone</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Immutable version audit history and change tracking</span>
+            </li>
+          </ul>
+        </div>
+        <div class="capability-visual-side">
+          <img src="assets/ui-stage-review.webp" alt="MitFloww Revision Control Screen" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Capability 3: Secure Delivery -->
+      <div class="capability-editorial-row">
+        <div class="capability-text-side">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            SECURE DELIVERY
+          </div>
+          <h3>One controlled link from review to release.</h3>
+          <p>
+            Replace the chaotic mess of WeTransfer download links, separate invoice PDFs, and endless confirmation emails. One clean, private MitFloww project link carries the delivery all the way to completion.
+          </p>
+          <ul class="capability-specs-list">
+            <li>
+              <i data-lucide="check"></i>
+              <span>Single private URL handles preview, invoice, and release</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Encrypted time-limited download URLs generated on demand</span>
+            </li>
+            <li>
+              <i data-lucide="check"></i>
+              <span>Automated receipt and proof-of-delivery documentation</span>
+            </li>
+          </ul>
+        </div>
+        <div class="capability-visual-side">
+          <img src="assets/ui-stage-release.webp" alt="MitFloww Secure Delivery Link Screen" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 8: CREATOR DISCIPLINE SELECTOR (Simple Tabs, No Cards)
+       ========================================================================== -->
+  <section class="creators-selector-section">
+    <div class="site-container">
+      <div class="creators-header-center">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          TAILORED FOR HIGH-VALUE PRODUCTION
+        </div>
+        <h2 style="font-size: clamp(32px, 4.5vw, 52px); margin-bottom: 16px;">
+          Built for people who deliver valuable digital work.
+        </h2>
+        <p style="color: var(--app-sub-text); font-size: 18px;">
+          Select your discipline to see how MitFloww safeguards your specific project handoff.
+        </p>
+      </div>
+
+      <!-- Discipline Nav Tabs -->
+      <div class="creators-tab-nav" role="tablist">
+        <button class="creator-pill-trigger is-active" data-creator-target="designers" role="tab" aria-selected="true">
+          Designers
+        </button>
+        <button class="creator-pill-trigger" data-creator-target="video" role="tab" aria-selected="false">
+          Video Editors
+        </button>
+        <button class="creator-pill-trigger" data-creator-target="developers" role="tab" aria-selected="false">
+          Developers
+        </button>
+      </div>
+
+      <!-- Panel: Designers -->
+      <div class="creator-stage-panel is-active" data-creator-panel="designers">
+        <div class="creator-panel-text">
+          <span class="eyebrow">BRAND &amp; PRODUCT DESIGN</span>
+          <h3>Protect vector masters and typography licenses.</h3>
+          <p>
+            Clients inspect interactive multi-page decks, Figma prototypes, and typography sheets with crisp watermarks. High-resolution vector source files (AI, EPS, SVG) and font files stay encrypted until final settlement.
+          </p>
+          <a href="/preregister/" class="btn-primary">
+            Start protecting design work
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+        <div class="creator-deliverable-preview">
+          <img src="assets/ui-design-vector.webp" alt="Design Delivery Screen">
+        </div>
+      </div>
+
+      <!-- Panel: Video Editors -->
+      <div class="creator-stage-panel" data-creator-panel="video">
+        <div class="creator-panel-text">
+          <span class="eyebrow">MOTION &amp; FILM PRODUCTION</span>
+          <h3>Stream ProRes timelines without surrendering master cuts.</h3>
+          <p>
+            Clients review 4K watermarked streaming previews with frame-accurate timecode annotations. Raw ProRes, color XMLs, and project archives unlock automatically when the milestone invoice is paid.
+          </p>
+          <a href="/preregister/" class="btn-primary">
+            Start protecting video work
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+        <div class="creator-deliverable-preview">
+          <img src="assets/ui-video-timeline.webp" alt="Video Review Screen">
+        </div>
+      </div>
+
+      <!-- Panel: Developers -->
+      <div class="creator-stage-panel" data-creator-panel="developers">
+        <div class="creator-panel-text">
+          <span class="eyebrow">ENGINEERING &amp; SOFTWARE</span>
+          <h3>Ship production builds without relinquishing repository keys.</h3>
+          <p>
+            Provide sandboxed staging previews and QA access while private source code repositories, deployment credentials, and database schemas remain locked behind verified payment escrow.
+          </p>
+          <a href="/preregister/" class="btn-primary">
+            Start protecting engineering work
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+        <div class="creator-deliverable-preview">
+          <img src="assets/ui-dev-sandbox.webp" alt="Engineering Handoff Screen">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 9: SECURITY — Controlled Access Architecture (No Fake Lock)
+       ========================================================================== -->
+  <section id="security" class="security-editorial-section">
+    <div class="site-container">
+      <div class="security-header-center">
+        <div class="eyebrow" style="color: #7dd3fc;">
+          <span class="eyebrow-dot" style="background-color: #38bdf8;"></span>
+          CONTROLLED ACCESS ARCHITECTURE
+        </div>
+        <h2>Security by architecture, not by trust.</h2>
+        <p>
+          Preview available → Payment required → Payment confirmed → Full files released
+        </p>
+      </div>
+
+      <!-- 4 Architectural Stages -->
+      <div class="security-pipeline-flow">
+        <div class="pipeline-step-node">
+          <span class="pipeline-node-num">01</span>
+          <h4>Sandboxed Previews</h4>
+          <p>Assets are converted into stream-only formats with visual watermarking. Master download URLs are never exposed.</p>
+        </div>
+
+        <div class="pipeline-step-node">
+          <span class="pipeline-node-num">02</span>
+          <h4>Client Sign-off</h4>
+          <p>Clients review watermarked previews and approve deliverables, generating an immutable handoff snapshot.</p>
+        </div>
+
+        <div class="pipeline-step-node">
+          <span class="pipeline-node-num">03</span>
+          <h4>Webhook Settlement</h4>
+          <p>Payment is captured via 256-bit encrypted checkout. Real-time bank webhooks verify settlement before granting release.</p>
+        </div>
+
+        <div class="pipeline-step-node">
+          <span class="pipeline-node-num">04</span>
+          <h4>Ephemeral Signed URLs</h4>
+          <p>Upon verified payment, time-limited cryptographic download URLs are issued exclusively to authorized clients.</p>
+        </div>
+      </div>
+
+      <!-- Live Interactive Access State Simulator -->
+      <div class="security-interactive-demo">
+        <div class="demo-state-text">
+          <h4 id="sec-status-title">
+            <i id="sec-status-icon" data-lucide="lock"></i>
+            Client View: Review &amp; Payment Required
+          </h4>
+          <p id="sec-status-desc">
+            Watermarked preview enabled. Master asset downloads and source bundles are encrypted.
+          </p>
+        </div>
+
+        <div class="demo-toggle-switch">
+          <button id="sec-toggle-pre" class="demo-toggle-btn is-active">Pre-Payment (Protected)</button>
+          <button id="sec-toggle-post" class="demo-toggle-btn">Post-Payment (Unlocked)</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 10: FINAL CTA — Huge Typography & Serene Whitespace
+       ========================================================================== -->
+  <section class="final-cta-section">
+    <div class="site-container final-cta-wrap">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        TAKE CONTROL OF YOUR NEXT HANDOFF
+      </div>
+      <h2 class="final-cta-headline">
+        Your work deserves<br>a safer handoff.
+      </h2>
+      <p class="final-cta-subtext">
+        Stop delivering valuable files on trust alone. Join freelancers and studios taking control of their delivery.
+      </p>
+      <a href="/preregister/" class="btn-primary" style="height: 54px; padding: 0 36px; font-size: 16px;">
+        Get early access
+        <i data-lucide="arrow-right"></i>
+      </a>
+      <div style="margin-top: 16px; font-size: 13px; color: var(--app-muted);">
+        Takes less than a minute · Free during early access onboarding
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 11: MINIMAL FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-columns-grid">
+        <div class="footer-brand-side">
+          <img src="assets/logo.svg" alt="MitFloww Logo" width="138" height="28">
+          <p>
+            The controlled delivery workflow for freelancers and independent creative studios.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="#workflow-story">How it works</a></li>
+            <li><a href="#showcase-story">Product Tour</a></li>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#security">Security Model</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Audience</h5>
+          <ul>
+            <li><a href="#capabilities">Designers</a></li>
+            <li><a href="#capabilities">Video Editors</a></li>
+            <li><a href="#capabilities">Developers</a></li>
+            <li><a href="/preregister/">Studios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><a href="/blog/index.html">Blog</a></li>
+            <li><a href="/what-is-mitfloww.html">What is MitFloww?</a></li>
+            <li><a href="/mitfloww-review.html">Workflow Review</a></li>
+            <li><a href="/preregister/">Join Early Access</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-baseline">
+        <div>&copy; 2026 MitFloww. All rights reserved.</div>
+        <div>Built for the work behind the work.</div>
+      </div>
+    </div>
   </footer>
 
-  <script src="landing.js" defer></script>
+  <!-- Vendor Lucide Icons Library -->
+  <script src="assets/vendor/lucide.min.js"></script>
+  <!-- Main Scroll Storytelling & Product Engine Script -->
+  <script src="landing.js"></script>
 </body>
 </html>
