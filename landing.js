@@ -1,13 +1,14 @@
 /**
  * MitFloww — Ground-Up Interactive Scroll Storytelling & Product Engine
  * High-performance, zero-stuck scroll scrubbing, authentic product state transformations,
- * and 60fps motion architecture canvas.
+ * Real product visuals, lightweight scroll storytelling, and progressive disclosure.
  */
 
 (function () {
   "use strict";
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Never abort animations based on arbitrary OS or browser flags
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Initialize Lucide Icons
   function initIcons() {
@@ -68,12 +69,12 @@
   }
 
   /* ==========================================================================
-     2. Hero Section: Subtle Mouse 3D Perspective & Scroll Scrub
+     2. Hero Section: Mouse 3D Perspective & Scroll Scrub
      ========================================================================== */
   const heroSection = document.getElementById("hero-section");
   const heroProductStage = document.getElementById("hero-product-stage");
 
-  if (heroSection && heroProductStage && !reduceMotion) {
+  if (heroSection && heroProductStage) {
     let mouseX = 0;
     let mouseY = 0;
     let currentRotateX = 0;
@@ -85,9 +86,9 @@
       const rect = heroSection.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      // Very restrained subtle tilt (max 3 degrees)
-      mouseY = ((y / rect.height) - 0.5) * -6;
-      mouseX = ((x / rect.width) - 0.5) * 6;
+      // Controlled, responsive subtle tilt
+      mouseY = ((y / rect.height) - 0.5) * -7;
+      mouseX = ((x / rect.width) - 0.5) * 7;
     });
 
     heroSection.addEventListener("mouseleave", function () {
@@ -105,18 +106,22 @@
         currentRotateY += (mouseX - currentRotateY) * 0.08;
       }
 
-      // Subtle scroll scrub for hero as user leaves the top
-      const scrollY = window.scrollY;
-      const heroHeight = heroSection.offsetHeight;
+      // Scroll scrub for hero as user leaves the top
+      const scrollY = window.scrollY || window.pageYOffset;
+      const heroHeight = heroSection.offsetHeight || 800;
       const heroProgress = Math.min(Math.max(scrollY / heroHeight, 0), 1);
       const heroScale = 1 - (heroProgress * 0.05);
 
       heroProductStage.style.transform = `perspective(1400px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) scale(${heroScale.toFixed(3)})`;
 
-      requestAnimationFrame(updateHeroDepth);
+      if (!reduceMotion) requestAnimationFrame(updateHeroDepth);
     }
 
-    requestAnimationFrame(updateHeroDepth);
+    if (!reduceMotion) {
+      requestAnimationFrame(updateHeroDepth);
+    } else {
+      heroProductStage.style.transform = "";
+    }
   }
 
   /* ==========================================================================
@@ -139,30 +144,30 @@
 
   const workflowStageImages = [
     "assets/ui-stage-prepare.webp",
-    "assets/ui-stage-review.webp",
-    "assets/ui-stage-payment.webp",
-    "assets/ui-stage-release.webp"
+    "assets/ui-client-review-light.webp",
+    "assets/real_light_client_paid.png",
+    "assets/real_light_client_paid.png"
   ];
 
   const workflowStageMeta = [
     {
-      title: "Nordic_Campaign_Master_ProRes.mov",
-      tag: "Stage 01: Raw Masters Encrypted",
+      title: "Project_Share_Access.cfg",
+      tag: "Stage 01: Client Access Prepared",
       status: "01 / Prepare: Raw master files encrypted with ephemeral keys at rest."
     },
     {
-      title: "Brand_Film_Preview_1080p.mov",
-      tag: "Stage 02: Watermarked Stream Only",
+      title: "Brand_Identity_Client_Review.pdf",
+      tag: "Stage 02: Client Stream Protected",
       status: "02 / Review: Pinned client feedback active. Master downloads locked."
     },
     {
       title: "Escrow_Milestone_Settlement.inv",
-      tag: "Stage 03: Stripe Escrow Active",
+      tag: "Stage 03: Escrow Payment Active",
       status: "03 / Payment: Verified escrow checkout awaiting client clearance."
     },
     {
       title: "Decrypted_Production_Master.zip",
-      tag: "Stage 04: Master Vault Unsealed",
+      tag: "Stage 04: Master Deliverables Unlocked",
       status: "04 / Release: Settlement verified. All decrypted masters released."
     }
   ];
@@ -206,7 +211,7 @@
   }
 
   function handleWorkflowScrub() {
-    if (!workflowSection || reduceMotion || window.innerWidth <= 768) return;
+    if (!workflowSection) return;
 
     const rect = workflowSection.getBoundingClientRect();
     const scrollDistance = workflowSection.offsetHeight - window.innerHeight;
@@ -237,7 +242,7 @@
   // Allow clicking directly on any narrative step to jump smoothly
   workflowSteps.forEach(function (step, index) {
     step.addEventListener("click", function () {
-      if (window.innerWidth > 768 && workflowSection) {
+      if (workflowSection) {
         const scrollDistance = workflowSection.offsetHeight - window.innerHeight;
         const targetScroll = workflowSection.offsetTop + (scrollDistance * (index / 3));
         window.scrollTo({ top: targetScroll, behavior: "smooth" });
@@ -260,33 +265,43 @@
 
   const showcaseAssets = [
     {
-      src: "assets/ui-stage-review.webp",
-      title: "In-Canvas Review · Spatial Annotations Active",
-      tag: "Live Revision Mode"
+      src: "assets/real_light_projects.png",
+      title: "Project Hub · Quality Marketing",
+      tag: "5 deliverable projects · Controlled escrow ready"
     },
     {
-      src: "assets/ui-stage-prepare.webp",
-      title: "File Ingestion · Stream Watermark Matrix Generated",
-      tag: "Stream Only"
+      src: "assets/crop_real_revision_wide.webp",
+      title: "Revision Control · File review",
+      tag: "Comments & version history"
     },
     {
-      src: "assets/ui-stage-payment.webp",
-      title: "Escrow Settlement Modal · Stripe Connect Active",
-      tag: "Escrow Verified"
+      src: "assets/real_light_user_share_modal.png",
+      title: "Share Project · Client access",
+      tag: "Protected sharing"
     }
   ];
 
+  let showcaseSwapTimer;
   function setShowcaseTab(index) {
     showcaseTriggers.forEach(function (trigger, i) {
       trigger.classList.toggle("is-active", i === index);
     });
 
     if (showcaseImage && showcaseAssets[index]) {
-      showcaseImage.style.opacity = "0.5";
-      setTimeout(function () {
-        showcaseImage.src = showcaseAssets[index].src;
-        showcaseImage.style.opacity = "1";
-      }, 80);
+      const frame = showcaseImage.closest(".showcase-visual-frame");
+      if (frame) {
+        frame.classList.add("is-changing");
+        frame.dataset.showcaseView = String(index);
+      }
+      clearTimeout(showcaseSwapTimer);
+      const nextImage = new Image();
+      nextImage.onload = function () {
+        showcaseSwapTimer = setTimeout(function () {
+          showcaseImage.src = nextImage.src;
+          if (frame) frame.classList.remove("is-changing");
+        }, 140);
+      };
+      nextImage.src = showcaseAssets[index].src;
     }
 
     if (showcaseWindowTitle && showcaseAssets[index]) {
@@ -307,6 +322,24 @@
       setShowcaseTab(index);
     });
   });
+
+  const showcaseFrame = document.querySelector(".showcase-visual-frame");
+  if (showcaseFrame && showcaseImage && !reduceMotion) {
+    showcaseFrame.addEventListener("pointermove", function (event) {
+      if (showcaseFrame.dataset.showcaseView !== "0") return;
+      const rect = showcaseFrame.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5);
+      const y = ((event.clientY - rect.top) / rect.height - 0.5);
+      const rotateY = x * 7;
+      const rotateX = y * -6;
+      const shiftX = x * 18;
+      const shiftY = y * 12;
+      showcaseImage.style.transform = "perspective(1100px) rotateX(" + rotateX.toFixed(2) + "deg) rotateY(" + rotateY.toFixed(2) + "deg) translate3d(" + shiftX.toFixed(2) + "px, " + shiftY.toFixed(2) + "px, 0) scale(1.026)";
+    });
+    showcaseFrame.addEventListener("pointerleave", function () {
+      showcaseImage.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)";
+    });
+  }
 
   /* ==========================================================================
      5. Creator Types Interactive Workspace Selector
@@ -335,367 +368,104 @@
   /* ==========================================================================
      6. Security & Controlled-Access State Simulator
      ========================================================================== */
-  const secTogglePre = document.getElementById("sec-toggle-pre");
-  const secTogglePost = document.getElementById("sec-toggle-post");
-  const secStatusTitle = document.getElementById("sec-status-title");
-  const secStatusDesc = document.getElementById("sec-status-desc");
+  const securityState = document.querySelector(".security-state-demo");
+  const securityStateButtons = document.querySelectorAll("[data-security-state-btn]");
+  const securityStateImages = document.querySelectorAll("[data-security-image]");
+  const securityTitle = document.getElementById("security-state-title");
+  const securityDesc = document.getElementById("security-state-desc");
+  const securityCaption = document.getElementById("security-state-caption-text");
+  const securityCaptionIcon = document.getElementById("security-state-caption-icon");
 
-  if (secTogglePre && secTogglePost && secStatusTitle && secStatusDesc) {
-    secTogglePre.addEventListener("click", function () {
-      secTogglePre.classList.add("is-active");
-      secTogglePost.classList.remove("is-active");
-      secStatusTitle.innerHTML = '<i data-lucide="lock"></i> Client View: Review & Payment Required';
-      secStatusDesc.textContent = "Watermarked preview enabled. Master asset downloads and source bundles are encrypted.";
-      initIcons();
+  function setSecurityState(state) {
+    if (!securityState) return;
+    securityState.dataset.securityState = state;
+    securityStateButtons.forEach(function (button) {
+      const active = button.getAttribute("data-security-state-btn") === state;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", String(active));
     });
+    securityStateImages.forEach(function (image) {
+      image.classList.toggle("is-active", image.getAttribute("data-security-image") === state);
+    });
+    if (securityTitle) securityTitle.textContent = state === "post" ? "Payment confirmed. Final files unlocked." : "Review & payment required";
+    if (securityDesc) securityDesc.textContent = state === "post" ? "The client can now download the released project files from the same project view." : "Protected preview available. Master files remain locked until payment is confirmed.";
+    if (securityCaption) securityCaption.textContent = state === "post" ? "Final files unlocked" : "Protected preview";
+    if (securityCaptionIcon) securityCaptionIcon.setAttribute("data-lucide", state === "post" ? "unlock" : "lock");
+    initIcons();
+  }
 
-    secTogglePost.addEventListener("click", function () {
-      secTogglePost.classList.add("is-active");
-      secTogglePre.classList.remove("is-active");
-      secStatusTitle.innerHTML = '<i data-lucide="unlock"></i> Client View: Payment Confirmed · Unlocked';
-      secStatusDesc.textContent = "Watermark dissolves instantly. Ephemeral signed download tokens issued for raw files.";
+  securityStateButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      setSecurityState(button.getAttribute("data-security-state-btn"));
+    });
+  });
+
+  const motionVideo = document.getElementById("mitfloww-motion-video");
+  const motionVideoToggle = document.getElementById("cinematic-video-toggle");
+  if (motionVideo && motionVideoToggle) {
+    motionVideoToggle.addEventListener("click", function () {
+      if (motionVideo.paused) {
+        motionVideo.play();
+        motionVideoToggle.innerHTML = '<i data-lucide="pause"></i><span>Pause film</span>';
+      } else {
+        motionVideo.pause();
+        motionVideoToggle.innerHTML = '<i data-lucide="play"></i><span>Play film</span>';
+      }
       initIcons();
     });
   }
 
   /* ==========================================================================
-     7. Custom MitFloww Motion Video / Interactive Workflow Engine (60fps Canvas)
+     10. Scroll Reveal Animations (High-Performance IntersectionObserver)
      ========================================================================== */
-  const motionCanvas = document.getElementById("mitfloww-motion-canvas");
-  const videoToggleBtn = document.getElementById("cinematic-video-toggle");
-  const motionPills = document.querySelectorAll(".motion-pill");
+  function initScrollReveal() {
+    const revealElements = document.querySelectorAll(".reveal-up, [data-reveal]");
+    if (!revealElements.length) return;
 
-  if (motionCanvas && motionCanvas.getContext) {
-    const ctx = motionCanvas.getContext("2d");
-    let isPlaying = !reduceMotion;
-    let animFrameId = null;
-    let phase = 0; // 0: Ingest, 1: Encrypt, 2: Watermark, 3: Escrow, 4: Release
-    let phaseTimer = 0;
-    const PHASE_DURATION = 150; // frames per phase (~2.5s)
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-revealed");
+              if (entry.target.classList.contains("vulnerable-header-center")) {
+                entry.target.closest(".vulnerable-moment-section").classList.add("is-revealed");
+              }
+            } else {
+              entry.target.classList.remove("is-revealed");
+              if (entry.target.classList.contains("vulnerable-header-center")) {
+                entry.target.closest(".vulnerable-moment-section").classList.remove("is-revealed");
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: "0px 0px -40px 0px"
+        }
+      );
 
-    // Particles system
-    const particles = [];
-    for (let i = 0; i < 40; i++) {
-      particles.push({
-        x: Math.random() * 1280,
-        y: Math.random() * 720,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: (Math.random() - 0.5) * 1.5,
-        size: Math.random() * 3 + 1,
-        color: Math.random() > 0.5 ? "rgba(0, 91, 221, 0.4)" : "rgba(56, 189, 248, 0.3)"
+      revealElements.forEach(function (el) {
+        observer.observe(el);
+      });
+    } else {
+      revealElements.forEach(function (el) {
+        el.classList.add("is-revealed");
       });
     }
-
-    function setPhase(p) {
-      phase = p % 5;
-      phaseTimer = 0;
-      motionPills.forEach(function (pill, i) {
-        pill.classList.toggle("is-active", i === phase);
-      });
-    }
-
-    motionPills.forEach(function (pill, i) {
-      pill.addEventListener("click", function () {
-        setPhase(i);
-      });
-    });
-
-    if (videoToggleBtn) {
-      videoToggleBtn.addEventListener("click", function () {
-        isPlaying = !isPlaying;
-        videoToggleBtn.innerHTML = isPlaying
-          ? '<i data-lucide="pause"></i><span>Pause Motion</span>'
-          : '<i data-lucide="play"></i><span>Play Motion</span>';
-        initIcons();
-        if (isPlaying) loop();
-      });
-    }
-
-    function drawStage(time) {
-      const W = motionCanvas.width;
-      const H = motionCanvas.height;
-
-      // Deep dark background
-      ctx.fillStyle = "#080c14";
-      ctx.fillRect(0, 0, W, H);
-
-      // Subtle tech background grid
-      ctx.strokeStyle = "rgba(30, 41, 59, 0.4)";
-      ctx.lineWidth = 1;
-      for (let x = 0; x < W; x += 80) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, H);
-        ctx.stroke();
-      }
-      for (let y = 0; y < H; y += 80) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(W, y);
-        ctx.stroke();
-      }
-
-      // Floating ambient particles
-      particles.forEach(function (p) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = W;
-        if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H;
-        if (p.y > H) p.y = 0;
-
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      const cx = W / 2;
-      const cy = H / 2;
-
-      // Draw Main Pipeline Hub in Center
-      if (phase === 0) {
-        // PHASE 0: RAW ASSET INGESTION
-        ctx.fillStyle = "#005bdd";
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.textAlign = "center";
-        ctx.fillText("01 / RAW ASSET INGESTION", cx, cy - 160);
-
-        ctx.font = "bold 28px 'Manrope', sans-serif";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Ingesting High-Value Client Deliverables", cx, cy - 120);
-
-        // Animated Inbound File Cards
-        const fileNames = ["Brand_Film_4K_ProRes.mov (3.8 GB)", "Vector_Suite_Source.ai (184 MB)", "Typography_Commercial.zip (42 MB)"];
-        fileNames.forEach(function (fn, idx) {
-          const cardX = cx - 260 + (idx * 270);
-          const cardY = cy + Math.sin(time * 0.003 + idx) * 10;
-          ctx.fillStyle = "#1e293b";
-          ctx.strokeStyle = "#005bdd";
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.roundRect(cardX - 120, cardY - 45, 240, 90, 10);
-          ctx.fill();
-          ctx.stroke();
-
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 13px 'Inter', sans-serif";
-          ctx.fillText(fn.split(" ")[0], cardX, cardY - 10);
-          ctx.fillStyle = "#94a3b8";
-          ctx.font = "12px 'Inter', sans-serif";
-          ctx.fillText(fn.split(" ")[1] || "Ready", cardX, cardY + 16);
-        });
-
-      } else if (phase === 1) {
-        // PHASE 1: AES-256 VAULT ENCRYPTION
-        ctx.fillStyle = "#38bdf8";
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.textAlign = "center";
-        ctx.fillText("02 / CRYPTOGRAPHIC CUSTODY LOCK", cx, cy - 170);
-
-        ctx.font = "bold 28px 'Manrope', sans-serif";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Raw Master Files Sealed at Rest (AES-256)", cx, cy - 130);
-
-        // Rotating Shield & Lock Rings
-        const rot = time * 0.002;
-        ctx.save();
-        ctx.translate(cx, cy + 20);
-
-        // Outer Lock Ring
-        ctx.strokeStyle = "rgba(0, 91, 221, 0.4)";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.arc(0, 0, 110, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.strokeStyle = "#005bdd";
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.arc(0, 0, 110, rot, rot + Math.PI * 1.2);
-        ctx.stroke();
-
-        // Inner Shield
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#38bdf8";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.roundRect(-60, -60, 120, 120, 16);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.font = "bold 44px sans-serif";
-        ctx.fillStyle = "#38bdf8";
-        ctx.fillText("🔒", 0, 15);
-
-        ctx.restore();
-
-        ctx.font = "bold 13px 'DM Mono', monospace";
-        ctx.fillStyle = "#10b981";
-        ctx.fillText("✓ SHA-256 Checksum Verified · Ephemeral Decryption Keys Stored in Vault", cx, cy + 180);
-
-      } else if (phase === 2) {
-        // PHASE 2: STREAM WATERMARKING & REVISION PINS
-        ctx.fillStyle = "#ec8d1b";
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.textAlign = "center";
-        ctx.fillText("03 / STREAM-ONLY REVIEW & ANNOTATION", cx, cy - 170);
-
-        ctx.font = "bold 28px 'Manrope', sans-serif";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Clients Inspect Watermarked Stream Previews", cx, cy - 130);
-
-        // Simulated Frame Window
-        ctx.fillStyle = "#141c2e";
-        ctx.strokeStyle = "#334155";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.roundRect(cx - 360, cy - 70, 720, 240, 12);
-        ctx.fill();
-        ctx.stroke();
-
-        // Watermark sweep pattern
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
-        ctx.fillText("MITFLOWW PROTECTED STREAM · REVISION BOUNDS ACTIVE", cx, cy + 30);
-        ctx.fillText("RAW MASTER DOWNLOAD DISABLED UNTIL PAYMENT", cx, cy + 60);
-
-        // Animated Annotation Pin
-        const pinPulse = Math.sin(time * 0.006) * 4;
-        ctx.fillStyle = "#005bdd";
-        ctx.beginPath();
-        ctx.arc(cx - 180, cy + 20, 16 + pinPulse, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 14px sans-serif";
-        ctx.fillText("1", cx - 180, cy + 25);
-
-        // Comment Box
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#005bdd";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.roundRect(cx - 150, cy - 10, 280, 56, 8);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.font = "bold 12px 'Inter', sans-serif";
-        ctx.fillStyle = "#f8fafc";
-        ctx.textAlign = "left";
-        ctx.fillText("client@brand.com: Approved with color fix", cx - 135, cy + 14);
-        ctx.fillStyle = "#38bdf8";
-        ctx.font = "11px 'DM Mono', monospace";
-        ctx.fillText("Revision 1 of 3 Used · Frame 01:24:18", cx - 135, cy + 34);
-
-      } else if (phase === 3) {
-        // PHASE 3: VERIFIED ESCROW SETTLEMENT
-        ctx.fillStyle = "#10b981";
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.textAlign = "center";
-        ctx.fillText("04 / MILESTONE ESCROW SETTLEMENT", cx, cy - 170);
-
-        ctx.font = "bold 28px 'Manrope', sans-serif";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Client Settles Invoice via Stripe Escrow", cx, cy - 130);
-
-        // Escrow Checkout Card
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#10b981";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.roundRect(cx - 240, cy - 70, 480, 220, 14);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = "#94a3b8";
-        ctx.font = "12px 'DM Mono', monospace";
-        ctx.fillText("INVOICE #MF-9842 · STRIPE CONNECT", cx, cy - 35);
-
-        ctx.fillStyle = "#10b981";
-        ctx.font = "bold 38px 'Manrope', sans-serif";
-        ctx.fillText("$2,850.00 USD", cx, cy + 15);
-
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 14px 'Inter', sans-serif";
-        ctx.fillText("Milestone 02: Final Deliverables Clearance", cx, cy + 50);
-
-        // Verification Pill
-        ctx.fillStyle = "#064e3b";
-        ctx.strokeStyle = "#10b981";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.roundRect(cx - 160, cy + 75, 320, 36, 18);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = "#a7f3d0";
-        ctx.font = "bold 12px 'DM Mono', monospace";
-        ctx.fillText("✓ ESCROW SETTLED · WEBHOOK EMITTED", cx, cy + 98);
-
-      } else if (phase === 4) {
-        // PHASE 4: AUTOMATED MASTER DECRYPTION & RELEASE
-        ctx.fillStyle = "#10b981";
-        ctx.font = "bold 14px 'DM Mono', monospace";
-        ctx.textAlign = "center";
-        ctx.fillText("05 / INSTANT DECRYPTION & RELEASE", cx, cy - 170);
-
-        ctx.font = "bold 28px 'Manrope', sans-serif";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Watermark Dissolves · Raw Masters Unsealed", cx, cy - 130);
-
-        // Download Portal Box
-        ctx.fillStyle = "#0f172a";
-        ctx.strokeStyle = "#10b981";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.roundRect(cx - 300, cy - 65, 600, 210, 12);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = "#10b981";
-        ctx.font = "bold 16px 'Inter', sans-serif";
-        ctx.fillText("✓ All Deliverables Decrypted & Released", cx, cy - 25);
-
-        // Download Action Buttons
-        const downloads = ["Download 4K ProRes Film (3.8 GB) ↓", "Download Vector Master Pack (184 MB) ↓"];
-        downloads.forEach(function (dl, dIdx) {
-          ctx.fillStyle = "#005bdd";
-          ctx.beginPath();
-          ctx.roundRect(cx - 240, cy + 10 + (dIdx * 54), 480, 42, 8);
-          ctx.fill();
-
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 13px 'Inter', sans-serif";
-          ctx.fillText(dl, cx, cy + 36 + (dIdx * 54));
-        });
-
-        ctx.fillStyle = "#64748b";
-        ctx.font = "11px 'DM Mono', monospace";
-        ctx.fillText("Signed URLs active for 72h · Creator payout automatically transferred.", cx, cy + 185);
-      }
-    }
-
-    function loop(time) {
-      if (!isPlaying) return;
-      phaseTimer++;
-      if (phaseTimer >= PHASE_DURATION) {
-        setPhase(phase + 1);
-      }
-      drawStage(time || performance.now());
-      animFrameId = requestAnimationFrame(loop);
-    }
-
-    loop();
   }
 
-  // Support ?scroll=Y parameter for programmatic scroll testing
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const scrollPos = urlParams.get("scroll");
-    if (scrollPos) {
-      window.scrollTo(0, parseInt(scrollPos, 10));
-      handleWorkflowScrub();
-    }
-  } catch (e) {}
+  initScrollReveal();
+
+  const pageLoader = document.getElementById("page-loader");
+  function dismissLoader() {
+    if (pageLoader) pageLoader.classList.add("is-dismissed");
+  }
+  if (document.readyState === "complete") {
+    requestAnimationFrame(dismissLoader);
+  } else {
+    window.addEventListener("load", dismissLoader, { once: true });
+    setTimeout(dismissLoader, 900);
+  }
 
 })();
