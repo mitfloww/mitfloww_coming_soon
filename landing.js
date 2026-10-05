@@ -144,9 +144,9 @@
 
   const workflowStageImages = [
     "assets/ui-stage-prepare.webp",
-    "assets/ui-client-review-light.webp",
-    "assets/real_light_client_paid.png",
-    "assets/real_light_client_paid.png"
+    "assets/ui-stage-review.webp",
+    "assets/ui-stage-payment.webp",
+    "assets/real_client_paid.png"
   ];
 
   const workflowStageMeta = [
@@ -265,12 +265,12 @@
 
   const showcaseAssets = [
     {
-      src: "assets/real_light_projects.png",
+      src: "assets/ui-projects-light.webp",
       title: "Project Hub · Quality Marketing",
       tag: "5 deliverable projects · Controlled escrow ready"
     },
     {
-      src: "assets/crop_real_revision_wide.webp",
+      src: "assets/ui-stage-review.webp",
       title: "Revision Control · File review",
       tag: "Comments & version history"
     },

@@ -76,6 +76,16 @@ server.listen(PORT, async () => {
   await captureSection('.security-state-demo', path.join(ROOT, 'assets', 'section_security_post.png'));
   await captureSection('.secure-delivery-product-shot', path.join(ROOT, 'assets', 'section_secure_delivery.png'));
 
+  const workflow = await page.$('#workflow-story');
+  if (workflow) {
+    await workflow.evaluate(el => {
+      const distance = el.offsetHeight - window.innerHeight;
+      window.scrollTo(0, el.offsetTop + distance * 0.67);
+    });
+    await new Promise(r => setTimeout(r, 650));
+    await page.screenshot({ path: path.join(ROOT, 'assets', 'section_workflow_payment.png') });
+  }
+
   console.log('Section screenshots captured successfully!');
   await browser.close();
   server.close();

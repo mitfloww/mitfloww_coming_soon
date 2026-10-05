@@ -1731,6 +1731,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .security-state-redaction { display: block; top: 91%; left: 21%; width: 23%; height: 5.5%; }
+.payment-motion-art { background: #f8fbff; }
+.payment-motion-art figcaption { color: #52627a; }
+.overlay-state-payment.is-visible { background: transparent; backdrop-filter: none; }
+.workflow-visual-canvas .scrub-overlay-layer { background: transparent; backdrop-filter: none; }
+.workflow-visual-canvas .scrub-overlay-layer .state-badge-pill { display: none; }
+
+/* Payment Protection is a self-contained animated SVG illustration, never a video. */
+.payment-motion-art::before,
+.payment-motion-art::after { display: none; }
+.payment-motion-vector { display: block; width: 100%; height: auto; aspect-ratio: 640 / 460; }
+.payment-vector-orbits { transform-box: fill-box; transform-origin: center; animation: paymentVectorOrbit 16s linear infinite; }
+.payment-vector-file-one { transform-box: fill-box; transform-origin: center; animation: paymentVectorFileOne 6s ease-in-out infinite; }
+.payment-vector-file-two { transform-box: fill-box; transform-origin: center; animation: paymentVectorFileTwo 6s 1s ease-in-out infinite; }
+.payment-vector-lock { transform-box: fill-box; transform-origin: center; animation: paymentVectorLock 4.8s ease-in-out infinite; }
+.payment-vector-status { animation: paymentVectorStatus 4.8s ease-in-out infinite; }
+@keyframes paymentVectorOrbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes paymentVectorFileOne { 0%, 100% { transform: translate3d(0, 5px, 0) rotate(-2deg); } 50% { transform: translate3d(13px, -9px, 0) rotate(3deg); } }
+@keyframes paymentVectorFileTwo { 0%, 100% { transform: translate3d(0, -5px, 0) rotate(2deg); } 50% { transform: translate3d(-13px, 9px, 0) rotate(-3deg); } }
+@keyframes paymentVectorLock { 0%, 100% { transform: translateY(3px) scale(.985); } 50% { transform: translateY(-7px) scale(1.025); } }
+@keyframes paymentVectorStatus { 0%, 100% { opacity: .72; } 50% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .payment-vector-orbits, .payment-vector-file-one, .payment-vector-file-two,
+  .payment-vector-lock, .payment-vector-status { animation: none; }
+}
+
+/* Supplied revision screenshots: one quota crop on the right and one comment card below. */
+.revision-popover { top: -9%; right: -6%; width: min(46%, 330px); padding: 0; border-radius: 14px; transform: rotate(1.5deg); }
+.revision-popover img { border-radius: 13px; }
+.revision-popover-label, .revision-quota-popover, .revision-history-popover { display: none; }
+.revision-comment-popover { color: #172033; background: #f1f4f8; border-color: #dbe3ed; box-shadow: 0 22px 48px rgba(15,23,42,.18); }
+.revision-comment-avatar { color: #2563eb; background: #e7f0ff; border-color: #bfdbfe; }
+.revision-comment-popover strong { color: #075fe4; }
+.revision-comment-popover small { color: #64748b; }
+.revision-comment-popover p { color: #172033; }
+.revision-comment-popover b { color: #334155; }
 
 /* ==========================================================================
    Product-led landing page refinements
@@ -1837,10 +1873,13 @@ h1, h2, h3, h4, h5, h6 {
 .privacy-redaction::after { content: "client@mail.com"; display: block; padding: 2px 4px; color: #64748b; font: 500 clamp(8px, .8vw, 12px)/1.2 var(--font-body); white-space: nowrap; }
 .showcase-visual-frame[data-showcase-view="2"] .privacy-redaction { display: block; top: 20%; left: 10%; width: 31%; height: 5.5%; }
 .showcase-visual-frame[data-showcase-view="2"] .privacy-redaction { top: 28%; left: 25%; width: 25%; height: 5%; }
+.showcase-visual-frame[data-showcase-view="1"] .privacy-redaction { display: block; top: 87%; left: 8%; width: 52%; height: 10%; }
+.showcase-visual-frame[data-showcase-view="1"] .privacy-redaction::after { content: ""; }
 .authentic-product-shot { position: relative; }
 .authentic-product-shot img { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; object-position: top center; }
 .authentic-product-shot .privacy-redaction { display: block; top: 20%; left: 10%; width: 31%; height: 5.5%; }
-.revision-product-shot .privacy-redaction-revision { top: 88%; left: 12%; width: 30%; height: 4.5%; }
+.revision-product-shot .privacy-redaction-revision { top: 86%; left: 5%; width: 58%; height: 10%; }
+.revision-product-shot .privacy-redaction-revision::after { content: ""; }
 
 .authentic-product-shot { margin: 0; overflow: hidden; background: #f8fafc; }
 .authentic-product-shot figcaption { padding: 14px 18px; color: var(--app-sub-text); font-size: 13px; border-top: 1px solid var(--app-container-border); background: #fff; }
