@@ -7,6 +7,9 @@ import { DownloadIcon, LockIcon, TickIcon } from "@/components/icons";
 const STAGES = ["preview", "approve", "pay", "download"] as const;
 /** Time each stage is shown while auto-playing. */
 const STEP_MS = 2400;
+/** The screen fades out for this long before the next stage fades in. */
+const FADE_OUT_MS = 220;
+const FADE_OUT_CLICK_MS = 120;
 
 const FILES = [
   { type: "AI", name: "Logo_Suite.ai", size: "24.8 MB" },
@@ -19,8 +22,10 @@ const WATERMARK = "PREVIEW · MITFLOWW · PREVIEW · MITFLOWW · PREVIEW · MITF
 
 /**
  * The four-step delivery shown on a real project layout. Auto-plays while on
- * screen, pauses on hover/focus, stops once the visitor picks a step, and never
- * auto-plays under reduced motion.
+ * screen (mouse hover doesn't stop it); clicking a step jumps there at once
+ * and the loop carries on from it. Each change fades the screen out and back
+ * in so it's clear the stage moved on. Keyboard focus pauses the loop, and it
+ * never auto-plays under reduced motion.
  */
 export function DeliveryStage() {
   const { m } = useI18n();
@@ -28,14 +33,30 @@ export function DeliveryStage() {
   const [stage, setStage] = useState(0);
   const [captionIdx, setCaptionIdx] = useState(0);
   const [inView, setInView] = useState(false);
-  const [paused, setPaused] = useState(false);
-  const [userTookOver, setUserTookOver] = useState(false);
+  const [keyboardPaused, setKeyboardPaused] = useState(false);
   const [pageHidden, setPageHidden] = useState(false);
   const [reduce, setReduce] = useState(true);
+  const [fading, setFading] = useState(false);
   const consoleRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const fadeTimer = useRef(0);
 
-  const playing = !reduce && !userTookOver && inView && !paused && !pageHidden;
+  const playing = !reduce && inView && !keyboardPaused && !pageHidden;
+
+  /** Fade the screen out, switch stage, fade it back in. */
+  const goTo = (i: number, outMs: number) => {
+    window.clearTimeout(fadeTimer.current);
+    if (reduce) {
+      setStage(i);
+      return;
+    }
+    setFading(true);
+    fadeTimer.current = window.setTimeout(() => {
+      setStage(i);
+      setFading(false);
+    }, outMs);
+  };
+  useEffect(() => () => window.clearTimeout(fadeTimer.current), []);
 
   useEffect(() => {
     setReduce(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false);
@@ -50,15 +71,16 @@ export function DeliveryStage() {
   }, []);
 
   useEffect(() => {
-    if (!playing) return;
-    const timer = window.setTimeout(() => setStage((i) => (i + 1) % STAGES.length), STEP_MS);
+    if (!playing || fading) return;
+    const timer = window.setTimeout(() => goTo((stage + 1) % STAGES.length, FADE_OUT_MS), STEP_MS);
     return () => window.clearTimeout(timer);
-  }, [playing, stage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, stage, fading]);
 
   const choose = (i: number) => {
-    setUserTookOver(true);
-    setStage(i);
     setCaptionIdx(i);
+    if (i === stage && !fading) return;
+    goTo(i, FADE_OUT_CLICK_MS);
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -78,11 +100,12 @@ export function DeliveryStage() {
       <div
         className="container hero__stage"
         data-reveal
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
+        onFocus={(e) => {
+          // Pause for keyboard users only; a mouse click focuses the button too.
+          if ((e.target as HTMLElement).matches?.(":focus-visible")) setKeyboardPaused(true);
+        }}
         onBlur={(e) => {
-          if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) setKeyboardPaused(false);
         }}
       >
         <div
@@ -113,7 +136,7 @@ export function DeliveryStage() {
         </div>
         <p className="visually-hidden" id="stage-caption" aria-live="polite">{s.captions[captionIdx]}</p>
 
-        <div className="console" id="console" ref={consoleRef} data-stage={STAGES[stage]} aria-describedby="stage-caption">
+        <div className={`console${fading ? " is-fading" : ""}`} id="console" ref={consoleRef} data-stage={STAGES[stage]} aria-describedby="stage-caption">
           <div className="console__chrome" aria-hidden="true">
             <span className="console__dots"><i /><i /><i /></span>
             <span className="console__crumbs">{s.projects} <span>/</span> <b>Northwind rebrand</b></span>

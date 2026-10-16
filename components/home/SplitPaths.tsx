@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n/I18nProvider";
-import { DotField } from "./DotField";
 import { PathsCard } from "./Deck";
 
 /** Two destinations side by side: hire a freelancer (left), Assets Store (right). */
@@ -11,7 +10,6 @@ export function SplitPaths() {
   const s = m.home.split;
   return (
     <section className="paths" aria-label={s.title}>
-      <DotField />
       <div className="container paths__grid">
         <div className="paths__col" data-reveal>
           <PathsCard kind="hire" />

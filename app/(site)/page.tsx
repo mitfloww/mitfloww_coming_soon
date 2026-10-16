@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Intro } from "@/components/home/Intro";
+import { DotField } from "@/components/home/DotField";
 import { DeliveryStage } from "@/components/home/DeliveryStage";
 import { Statement } from "@/components/home/Statement";
 import { Workflow } from "@/components/home/Workflow";
@@ -58,6 +59,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={STRUCTURED_DATA} />
+      <DotField page />
       <main id="main" className="page-home">
         <Intro />
         <DeliveryStage />

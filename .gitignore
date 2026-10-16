@@ -4,3 +4,6 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 .vercel
+
+# Claude Code local settings (preview servers etc.), not part of the site
+.claude/

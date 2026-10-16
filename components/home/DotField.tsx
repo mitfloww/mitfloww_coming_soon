@@ -3,11 +3,12 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Quiet dot field behind the "hire / explore" split. Dots thin out around the
- * two text columns so the type stays clean, drift very slightly, and ease away
- * from the pointer. Static under reduced motion; paused when off screen.
+ * Quiet starry dot field. Dots drift very slightly and ease away from the
+ * pointer; static under reduced motion, paused when off screen.
+ *  - Default: fills its section, thinning out around the two text columns.
+ *  - `page`: one fixed field behind the whole page (every section shows it).
  */
-export function DotField() {
+export function DotField({ page = false }: { page?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -51,7 +52,9 @@ export function DotField() {
       const step = width < 640 ? 18 : 22;
       // Clear zones around the column centres (one column on narrow screens).
       const twoCols = width >= 900;
-      const zones = twoCols
+      const zones = page
+        ? []
+        : twoCols
         ? [{ x: width * 0.27, y: height * 0.5 }, { x: width * 0.73, y: height * 0.5 }]
         : [{ x: width * 0.5, y: height * 0.27 }, { x: width * 0.5, y: height * 0.73 }];
       const rx = twoCols ? width * 0.17 : width * 0.42;
@@ -129,7 +132,8 @@ export function DotField() {
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-    const section = canvas.parentElement;
+    // The page field follows the pointer anywhere; a section field only inside its section.
+    const section: HTMLElement | Window | null = page ? window : canvas.parentElement;
     const onMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       pointer.x = e.clientX - rect.left;
@@ -139,18 +143,20 @@ export function DotField() {
       pointer.x = -9999;
       pointer.y = -9999;
     };
-    section?.addEventListener("pointermove", onMove);
-    section?.addEventListener("pointerleave", onLeave);
+    section?.addEventListener("pointermove", onMove as EventListener, { passive: true });
+    if (page) document.documentElement.addEventListener("pointerleave", onLeave);
+    else section?.addEventListener("pointerleave", onLeave);
 
     return () => {
       window.cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
       themeObserver.disconnect();
-      section?.removeEventListener("pointermove", onMove);
-      section?.removeEventListener("pointerleave", onLeave);
+      section?.removeEventListener("pointermove", onMove as EventListener);
+      if (page) document.documentElement.removeEventListener("pointerleave", onLeave);
+      else section?.removeEventListener("pointerleave", onLeave);
     };
-  }, []);
+  }, [page]);
 
-  return <canvas ref={canvasRef} className="dotfield" aria-hidden="true" />;
+  return <canvas ref={canvasRef} className={page ? "dotfield dotfield--page" : "dotfield"} aria-hidden="true" />;
 }
