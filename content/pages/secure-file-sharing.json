@@ -1,0 +1,35 @@
+{
+  "title": "Secure File Sharing for Freelancers | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "Why secure file sharing is not enough unless the workflow also protects payment and access control."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/secure-file-sharing.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/secure-file-sharing.html",
+  "manifest": true,
+  "jsonLd": [],
+  "path": "/blog/secure-file-sharing.html",
+  "slug": "secure-file-sharing"
+}

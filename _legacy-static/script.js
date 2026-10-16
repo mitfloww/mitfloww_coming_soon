@@ -4,11 +4,9 @@
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8gLeQT1dU3gMalmJbKCQksVZ8cjNXItnSOU0KixkNlWoYxWSL02uD0FKNUsb-Fs1Z/exec";
 
-const heroSection = document.getElementById("heroSection");
 const siteFooter = document.getElementById("siteFooter");
 const onboardingFlow = document.getElementById("onboardingFlow");
 const successScreen = document.getElementById("successScreen");
-const btnJoinWaitlist = document.getElementById("btnJoinWaitlist");
 const form = document.getElementById("surveyForm");
 const steps = document.querySelectorAll(".step");
 const navItems = document.querySelectorAll(".step-item");
@@ -22,22 +20,6 @@ const totalSteps = steps.length;
 
 // Initialization
 updateUI();
-
-// ─── HERO TO ONBOARDING TRANSITION ───
-if(btnJoinWaitlist) {
-  btnJoinWaitlist.addEventListener("click", () => {
-    heroSection.classList.add("fade-out");
-    siteFooter.classList.add("fade-out");
-    setTimeout(() => {
-      heroSection.style.display = "none";
-      siteFooter.style.display = "none";
-      onboardingFlow.style.display = "flex";
-      // Force reflow for transition
-      void onboardingFlow.offsetWidth;
-      onboardingFlow.classList.add("fade-in");
-    }, 350);
-  });
-}
 
 // ─── NAVIGATION HANDLERS ───
 btnNext.addEventListener("click", () => {

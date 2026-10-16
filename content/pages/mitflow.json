@@ -1,0 +1,35 @@
+{
+  "title": "MitFlow vs MitFloww – Are they the same?",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "MitFlow vs MitFloww explained. Learn why MitFlow is a common misspelling and how MitFloww helps freelancers get paid before file delivery."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/mitflow.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/mitflow.html",
+  "manifest": true,
+  "jsonLd": [],
+  "path": "/blog/mitflow.html",
+  "slug": "mitflow"
+}

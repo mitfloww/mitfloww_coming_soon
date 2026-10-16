@@ -1,0 +1,35 @@
+{
+  "title": "Get Paid Before You Deliver | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "Why freelancers should get payment before delivering final files, and how that changes the client workflow."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/get-paid-before-delivery.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/get-paid-before-delivery.html",
+  "manifest": true,
+  "jsonLd": [],
+  "path": "/blog/get-paid-before-delivery.html",
+  "slug": "get-paid-before-delivery"
+}

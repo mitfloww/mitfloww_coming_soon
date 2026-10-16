@@ -1,0 +1,37 @@
+{
+  "title": "Unlimited Revisions Are Killing Your Freelance Business | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "Unlimited revisions reduce profitability and create scope creep. Learn how to set limits and protect your freelance work."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/revision-abuse.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/revision-abuse.html",
+  "manifest": true,
+  "jsonLd": [
+    "{\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"BlogPosting\",\n      \"headline\": \"Unlimited Revisions Are Killing Your Freelance Business\",\n      \"description\": \"Unlimited revisions reduce profitability and create scope creep. Learn how to set limits and protect your freelance work.\",\n      \"author\": {\n        \"@type\": \"Organization\",\n        \"name\": \"MitFloww\"\n      },\n      \"publisher\": {\n        \"@type\": \"Organization\",\n        \"name\": \"MitFloww\"\n      }\n    }"
+  ],
+  "path": "/blog/revision-abuse.html",
+  "slug": "revision-abuse"
+}

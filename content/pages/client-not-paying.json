@@ -1,0 +1,37 @@
+{
+  "title": "Client Not Paying After Delivery? (Freelancer Fix) | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "Clients not paying after delivery is usually a workflow issue. Learn how freelancers prevent non-payment with a structured delivery system."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/client-not-paying.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/client-not-paying.html",
+  "manifest": true,
+  "jsonLd": [
+    "{\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"BlogPosting\",\n    \"headline\": \"Client Not Paying After Delivery?\",\n    \"description\": \"A freelancer payment problem is often a workflow problem. Learn how to prevent non-payment after delivery.\",\n    \"author\": {\n      \"@type\": \"Organization\",\n      \"name\": \"MitFloww\"\n    },\n    \"publisher\": {\n      \"@type\": \"Organization\",\n      \"name\": \"MitFloww\"\n    }\n  }"
+  ],
+  "path": "/blog/client-not-paying.html",
+  "slug": "client-not-paying"
+}

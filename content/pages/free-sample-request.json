@@ -1,0 +1,35 @@
+{
+  "title": "Client Asking for Free Sample? Here’s What to Do (2026) | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "How to handle free sample requests from clients without losing time, money, or control."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/free-sample-request.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/free-sample-request.html",
+  "manifest": true,
+  "jsonLd": [],
+  "path": "/blog/free-sample-request.html",
+  "slug": "free-sample-request"
+}

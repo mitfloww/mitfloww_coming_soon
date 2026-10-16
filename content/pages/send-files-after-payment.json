@@ -1,0 +1,37 @@
+{
+  "title": "How to Send Files After Payment (Freelancer Workflow) | MitFloww",
+  "tags": [
+    {
+      "attr": "name",
+      "key": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    },
+    {
+      "attr": "name",
+      "key": "description",
+      "content": "A step-by-step workflow freelancers can use to send files only after payment. Reduce risk, avoid delays, and automate delivery."
+    },
+    {
+      "attr": "property",
+      "key": "og:url",
+      "content": "https://www.mitfloww.com/blog/send-files-after-payment.html"
+    },
+    {
+      "attr": "name",
+      "key": "apple-mobile-web-app-title",
+      "content": "MitFloww"
+    },
+    {
+      "attr": "name",
+      "key": "theme-color",
+      "content": "#ffffff"
+    }
+  ],
+  "canonical": "https://www.mitfloww.com/blog/send-files-after-payment.html",
+  "manifest": true,
+  "jsonLd": [
+    "{\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"BlogPosting\",\n    \"headline\": \"How to Send Files After Payment\",\n    \"description\": \"A structured workflow freelancers can use to deliver files only after payment is completed.\",\n    \"author\": {\n      \"@type\": \"Organization\",\n      \"name\": \"MitFloww\"\n    },\n    \"publisher\": {\n      \"@type\": \"Organization\",\n      \"name\": \"MitFloww\"\n    }\n  }"
+  ],
+  "path": "/blog/send-files-after-payment.html",
+  "slug": "send-files-after-payment"
+}

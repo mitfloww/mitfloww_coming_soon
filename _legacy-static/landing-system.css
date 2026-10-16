@@ -1,0 +1,1212 @@
+/**
+ * MitFloww — Landing Design System (foundation layer)
+ *
+ * Tokens and components for the redesigned landing page.
+ * Everything is namespaced (--mf-* tokens, .mf-* classes) so it can load
+ * alongside landing.css without changing any existing section.
+ * Landing page only — the blog, preregister and article pages use style.css.
+ *
+ * Contents
+ *   1. Tokens
+ *   2. Layout
+ *   3. Typography
+ *   4. Section labels
+ *   5. Buttons
+ *   6. Cards
+ *   7. Product UI frames
+ *   8. Status pills
+ *   9. Borders & rules
+ *  10. Accent effects
+ *  11. Reveal motion
+ */
+
+/* ==========================================================================
+   1. Tokens
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --mf-blue: #005BDD;
+  --mf-blue-hover: #004AC6;
+  --mf-blue-press: #003FA8;
+  --mf-cyan: #00C7FF;
+  --mf-blue-soft: #EAF3FF;
+  --mf-blue-tint: #F4F8FF;
+  --mf-blue-line: #CFE1FB;
+
+  /* Surfaces */
+  --mf-bg: #FFFFFF;
+  --mf-bg-subtle: #F8FAFC;
+  --mf-surface: #FFFFFF;
+  --mf-surface-sunken: #F3F6FA;
+
+  /* Ink */
+  --mf-ink: #0B1220;
+  --mf-ink-2: #5B6472;
+  --mf-ink-3: #7A8391;          /* meta text only — 4.0:1, use at ≥14px */
+  --mf-ink-inverse: #FFFFFF;
+
+  /* Lines */
+  --mf-line: #E6EAF0;
+  --mf-line-strong: #D5DCE6;
+  --mf-line-ink: rgba(11, 18, 32, 0.08);
+
+  /* Status */
+  --mf-success: #18A66A;
+  --mf-success-ink: #0E7A4C;
+  --mf-success-soft: #E8F7F0;
+  --mf-warning: #F59E0B;
+  --mf-warning-ink: #9A5B00;
+  --mf-warning-soft: #FEF5E3;
+  --mf-danger: #E5484D;
+  --mf-danger-ink: #B4262B;
+  --mf-danger-soft: #FDECEC;
+
+  /* Accent gradient — use sparingly: hairlines, focus edges, one word max */
+  --mf-gradient-accent: linear-gradient(90deg, var(--mf-blue) 0%, var(--mf-cyan) 100%);
+
+  /* Typography */
+  --mf-font-display: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mf-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mf-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --mf-text-display: clamp(44px, 6.4vw, 88px);
+  --mf-text-h1: clamp(38px, 5vw, 68px);
+  --mf-text-h2: clamp(32px, 3.9vw, 54px);
+  --mf-text-h3: clamp(22px, 2vw, 28px);
+  --mf-text-h4: 19px;
+  --mf-text-lead: clamp(18px, 1.45vw, 21px);
+  --mf-text-body: 16px;
+  --mf-text-small: 14px;
+  --mf-text-caption: 12px;
+  --mf-text-micro: 11px;
+
+  --mf-tracking-display: -0.04em;
+  --mf-tracking-heading: -0.03em;
+  --mf-tracking-tight: -0.011em;
+  --mf-tracking-mono: 0.12em;
+
+  /* Spacing — 4px base */
+  --mf-space-1: 4px;
+  --mf-space-2: 8px;
+  --mf-space-3: 12px;
+  --mf-space-4: 16px;
+  --mf-space-5: 20px;
+  --mf-space-6: 24px;
+  --mf-space-8: 32px;
+  --mf-space-10: 40px;
+  --mf-space-12: 48px;
+  --mf-space-16: 64px;
+  --mf-space-20: 80px;
+  --mf-space-24: 96px;
+  --mf-section-y: clamp(88px, 11vw, 168px);
+  --mf-gutter: clamp(20px, 4vw, 40px);
+
+  /* Layout */
+  --mf-width-text: 680px;
+  --mf-width-content: 1200px;
+  --mf-width-wide: 1360px;
+
+  /* Radius — selective. Default surfaces are square or 10px; pills are full. */
+  --mf-radius-xs: 4px;
+  --mf-radius-sm: 6px;
+  --mf-radius-md: 10px;
+  --mf-radius-lg: 14px;
+  --mf-radius-xl: 20px;
+  --mf-radius-full: 999px;
+
+  /* Shadows — ink-tinted, low opacity, always paired with a 1px line */
+  --mf-shadow-xs: 0 1px 2px rgba(11, 18, 32, 0.05);
+  --mf-shadow-sm: 0 1px 2px rgba(11, 18, 32, 0.04), 0 2px 8px -2px rgba(11, 18, 32, 0.06);
+  --mf-shadow-md: 0 1px 2px rgba(11, 18, 32, 0.04), 0 12px 32px -12px rgba(11, 18, 32, 0.12);
+  --mf-shadow-product:
+    0 0 0 1px rgba(11, 18, 32, 0.06),
+    0 2px 4px rgba(11, 18, 32, 0.03),
+    0 24px 48px -20px rgba(11, 18, 32, 0.18),
+    0 48px 96px -40px rgba(0, 91, 221, 0.18);
+  --mf-shadow-focus: 0 0 0 3px rgba(0, 91, 221, 0.22);
+
+  /* Motion */
+  --mf-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mf-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --mf-duration-fast: 140ms;
+  --mf-duration: 240ms;
+  --mf-duration-slow: 700ms;
+
+  /* Layering */
+  --mf-z-raised: 2;
+  --mf-z-overlay: 10;
+  --mf-z-nav: 100;
+}
+
+/* ==========================================================================
+   2. Layout
+   ========================================================================== */
+
+.mf-container {
+  width: 100%;
+  max-width: calc(var(--mf-width-content) + var(--mf-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--mf-gutter);
+}
+
+.mf-container--wide { max-width: calc(var(--mf-width-wide) + var(--mf-gutter) * 2); }
+.mf-container--text { max-width: calc(var(--mf-width-text) + var(--mf-gutter) * 2); }
+
+.mf-section {
+  position: relative;
+  padding-block: var(--mf-section-y);
+  background: var(--mf-bg);
+  color: var(--mf-ink);
+}
+
+.mf-section--subtle { background: var(--mf-bg-subtle); }
+.mf-section--ruled { border-top: 1px solid var(--mf-line); }
+.mf-section--tight { padding-block: calc(var(--mf-section-y) * 0.6); }
+
+/* Section intro: label + heading + lead, left-aligned editorial by default */
+.mf-section-head {
+  display: grid;
+  gap: var(--mf-space-5);
+  max-width: 760px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.mf-section-head--center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+/* Two-column editorial split: heading left, supporting copy right */
+.mf-section-head--split {
+  max-width: none;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: end;
+  gap: var(--mf-space-8) var(--mf-space-16);
+}
+
+.mf-section-head--split > .mf-label { grid-column: 1 / -1; }
+
+@media (max-width: 860px) {
+  .mf-section-head--split { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   3. Typography
+   ========================================================================== */
+
+.mf-display,
+.mf-h1,
+.mf-h2,
+.mf-h3,
+.mf-h4 {
+  font-family: var(--mf-font-display);
+  color: var(--mf-ink);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.mf-display {
+  font-size: var(--mf-text-display);
+  line-height: 0.98;
+  letter-spacing: var(--mf-tracking-display);
+  font-weight: 800;
+}
+
+.mf-h1 {
+  font-size: var(--mf-text-h1);
+  line-height: 1.02;
+  letter-spacing: var(--mf-tracking-display);
+  font-weight: 800;
+}
+
+.mf-h2 {
+  font-size: var(--mf-text-h2);
+  line-height: 1.06;
+  letter-spacing: var(--mf-tracking-heading);
+}
+
+.mf-h3 {
+  font-size: var(--mf-text-h3);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+}
+
+.mf-h4 {
+  font-size: var(--mf-text-h4);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.mf-lead,
+.mf-body,
+.mf-small,
+.mf-caption {
+  font-family: var(--mf-font-body);
+  color: var(--mf-ink-2);
+  text-wrap: pretty;
+}
+
+.mf-lead {
+  font-size: var(--mf-text-lead);
+  line-height: 1.55;
+  letter-spacing: var(--mf-tracking-tight);
+  max-width: 60ch;
+}
+
+.mf-body {
+  font-size: var(--mf-text-body);
+  line-height: 1.65;
+  max-width: 68ch;
+}
+
+.mf-small {
+  font-size: var(--mf-text-small);
+  line-height: 1.55;
+}
+
+.mf-caption {
+  font-size: var(--mf-text-caption);
+  line-height: 1.5;
+  color: var(--mf-ink-3);
+}
+
+.mf-mono {
+  font-family: var(--mf-font-mono);
+  font-size: var(--mf-text-caption);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-feature-settings: "zero" 1;
+}
+
+/* Muted second clause inside a heading: “Get paid. <span>Then deliver.</span>” */
+.mf-muted { color: var(--mf-ink-3); }
+
+/* Brand emphasis — solid blue; the gradient variant is for a single word at most */
+.mf-em { color: var(--mf-blue); }
+
+.mf-em--gradient {
+  background: var(--mf-gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mf-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   4. Section labels
+   ========================================================================== */
+
+/*
+ * <p class="mf-label"><span class="mf-label__index">01</span>Workflow</p>
+ */
+.mf-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mf-space-3);
+  margin: 0;
+  font-family: var(--mf-font-mono);
+  font-size: var(--mf-text-micro);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--mf-tracking-mono);
+  text-transform: uppercase;
+  color: var(--mf-ink-2);
+}
+
+.mf-label::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--mf-ink);
+  opacity: 0.35;
+}
+
+.mf-label__index {
+  color: var(--mf-blue);
+}
+
+.mf-label__index::after {
+  content: "/";
+  margin-left: var(--mf-space-3);
+  color: var(--mf-line-strong);
+}
+
+.mf-label--accent { color: var(--mf-blue); }
+.mf-label--accent::before { background: var(--mf-gradient-accent); opacity: 1; }
+
+.mf-label--plain::before { display: none; }
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+
+/*
+ * <a class="mf-btn mf-btn--primary" href="/preregister/">
+ *   Get early access <i data-lucide="arrow-right" class="mf-btn__icon"></i>
+ * </a>
+ */
+.mf-btn {
+  --mf-btn-h: 44px;
+  --mf-btn-px: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mf-space-2);
+  height: var(--mf-btn-h);
+  padding-inline: var(--mf-btn-px);
+  border: 1px solid transparent;
+  border-radius: var(--mf-radius-sm);
+  font-family: var(--mf-font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--mf-duration-fast) ease,
+    border-color var(--mf-duration-fast) ease,
+    color var(--mf-duration-fast) ease,
+    box-shadow var(--mf-duration-fast) ease,
+    transform var(--mf-duration-fast) ease;
+}
+
+.mf-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--mf-shadow-focus);
+}
+
+.mf-btn:active { transform: translateY(1px); }
+
+.mf-btn[disabled],
+.mf-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.mf-btn__icon,
+.mf-btn > svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke-width: 2;
+  transition: transform var(--mf-duration) var(--mf-ease-out);
+}
+
+.mf-btn:hover .mf-btn__icon,
+.mf-btn:hover > svg:last-child { transform: translateX(2px); }
+
+/* Primary — solid brand blue with a faint top highlight */
+.mf-btn--primary {
+  background: var(--mf-blue);
+  color: var(--mf-ink-inverse);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 1px 2px rgba(0, 63, 168, 0.24),
+    0 4px 12px -4px rgba(0, 91, 221, 0.4);
+}
+
+.mf-btn--primary:hover { background: var(--mf-blue-hover); }
+.mf-btn--primary:active { background: var(--mf-blue-press); }
+
+.mf-btn--primary:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    var(--mf-shadow-focus);
+}
+
+/* Dark — ink button for contrast moments (final CTA, nav) */
+.mf-btn--dark {
+  background: var(--mf-ink);
+  color: var(--mf-ink-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), var(--mf-shadow-xs);
+}
+
+.mf-btn--dark:hover { background: #1A2333; }
+
+/* Secondary — white with hairline border */
+.mf-btn--secondary {
+  background: var(--mf-surface);
+  color: var(--mf-ink);
+  border-color: var(--mf-line-strong);
+  box-shadow: var(--mf-shadow-xs);
+}
+
+.mf-btn--secondary:hover {
+  border-color: #BCC5D2;
+  background: var(--mf-bg-subtle);
+}
+
+/* Ghost — no chrome until hover */
+.mf-btn--ghost {
+  background: transparent;
+  color: var(--mf-ink);
+}
+
+.mf-btn--ghost:hover { background: var(--mf-surface-sunken); }
+
+/* Link — inline text action with arrow, no box */
+.mf-btn--link {
+  --mf-btn-h: auto;
+  --mf-btn-px: 0;
+  color: var(--mf-blue);
+  border-radius: var(--mf-radius-xs);
+}
+
+.mf-btn--link:hover { color: var(--mf-blue-hover); }
+
+.mf-btn--sm { --mf-btn-h: 36px; --mf-btn-px: 14px; font-size: 14px; }
+.mf-btn--lg { --mf-btn-h: 52px; --mf-btn-px: 24px; font-size: 16px; }
+.mf-btn--block { width: 100%; }
+
+.mf-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mf-space-3);
+}
+
+/* ==========================================================================
+   6. Cards
+   ========================================================================== */
+
+/*
+ * Prefer .mf-cells (ruled grid, square) for feature lists.
+ * Use .mf-card only when an item genuinely needs to stand alone.
+ */
+.mf-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-3);
+  padding: clamp(24px, 2.4vw, 32px);
+  background: var(--mf-surface);
+  border: 1px solid var(--mf-line);
+  border-radius: var(--mf-radius-md);
+  color: var(--mf-ink);
+}
+
+.mf-card--subtle {
+  background: var(--mf-bg-subtle);
+}
+
+.mf-card--raised {
+  box-shadow: var(--mf-shadow-sm);
+}
+
+.mf-card--square { border-radius: 0; }
+
+.mf-card--interactive {
+  transition:
+    border-color var(--mf-duration) ease,
+    box-shadow var(--mf-duration) var(--mf-ease-out),
+    transform var(--mf-duration) var(--mf-ease-out);
+}
+
+.mf-card--interactive:hover {
+  border-color: var(--mf-line-strong);
+  box-shadow: var(--mf-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Selected / current state — blue edge, no fill change */
+.mf-card.is-active {
+  border-color: var(--mf-blue-line);
+  box-shadow: inset 3px 0 0 var(--mf-blue);
+}
+
+.mf-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mf-space-3);
+}
+
+.mf-card__title {
+  font-family: var(--mf-font-display);
+  font-size: var(--mf-text-h4);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--mf-ink);
+}
+
+.mf-card__text {
+  font-size: var(--mf-text-small);
+  line-height: 1.6;
+  color: var(--mf-ink-2);
+}
+
+/* Small square icon tile — only for icons that carry meaning */
+.mf-card__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--mf-line);
+  border-radius: var(--mf-radius-sm);
+  background: var(--mf-surface);
+  color: var(--mf-blue);
+}
+
+.mf-card__icon svg { width: 18px; height: 18px; stroke-width: 1.75; }
+
+/* Editorial ruled grid — hairline dividers, no per-item boxes */
+.mf-cells {
+  --mf-cells-cols: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--mf-cells-cols), minmax(0, 1fr));
+  background: var(--mf-surface);
+  border: 1px solid var(--mf-line);
+  overflow: hidden;
+}
+
+/* Each cell draws its right/bottom rule; the negative margin tucks the
+   outermost rules under the container border, so orphan cells stay clean. */
+.mf-cells > * {
+  margin: 0 -1px -1px 0;
+  padding: clamp(24px, 2.6vw, 36px);
+  border-right: 1px solid var(--mf-line);
+  border-bottom: 1px solid var(--mf-line);
+}
+
+.mf-cells--2 { --mf-cells-cols: 2; }
+.mf-cells--4 { --mf-cells-cols: 4; }
+.mf-cells--rounded { border-radius: var(--mf-radius-md); overflow: hidden; }
+
+@media (max-width: 1024px) {
+  .mf-cells--4 { --mf-cells-cols: 2; }
+  .mf-cells { --mf-cells-cols: 2; }
+  .mf-cells--2 { --mf-cells-cols: 2; }
+}
+
+@media (max-width: 640px) {
+  .mf-cells,
+  .mf-cells--2,
+  .mf-cells--4 { --mf-cells-cols: 1; }
+}
+
+/* ==========================================================================
+   7. Product UI frames
+   ========================================================================== */
+
+/*
+ * <figure class="mf-frame">
+ *   <div class="mf-frame__bar">
+ *     <span class="mf-frame__dots"><i></i><i></i><i></i></span>
+ *     <span class="mf-frame__title">Project Hub</span>
+ *     <span class="mf-pill mf-pill--success">Paid</span>
+ *   </div>
+ *   <div class="mf-frame__body"><img src="assets/ui-projects-light.webp" alt="…"></div>
+ * </figure>
+ */
+.mf-frame {
+  position: relative;
+  margin: 0;
+  background: var(--mf-surface);
+  border-radius: var(--mf-radius-lg);
+  box-shadow: var(--mf-shadow-product);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mf-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-3);
+  height: 40px;
+  padding-inline: var(--mf-space-4);
+  background: var(--mf-bg-subtle);
+  border-bottom: 1px solid var(--mf-line);
+}
+
+.mf-frame__dots {
+  display: inline-flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.mf-frame__dots > i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mf-line-strong);
+}
+
+.mf-frame__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--mf-font-mono);
+  font-size: var(--mf-text-micro);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--mf-ink-3);
+  text-align: center;
+}
+
+/* Keep the title centred when there is nothing on the right */
+.mf-frame__bar > .mf-frame__dots:first-child + .mf-frame__title:last-child { padding-right: 39px; }
+
+.mf-frame__body {
+  position: relative;
+  background: var(--mf-surface);
+}
+
+.mf-frame__body > img,
+.mf-frame__body > video,
+.mf-frame__body > picture > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Bare: screenshot only, no browser bar */
+.mf-frame--bare { border-radius: var(--mf-radius-md); }
+
+/* Flat: border instead of elevation — for in-grid or secondary shots */
+.mf-frame--flat {
+  box-shadow: none;
+  border: 1px solid var(--mf-line);
+}
+
+/* Crop: detail view of part of a screenshot */
+.mf-frame--crop .mf-frame__body {
+  aspect-ratio: var(--mf-crop-ratio, 4 / 3);
+  overflow: hidden;
+}
+
+.mf-frame--crop .mf-frame__body > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--mf-crop-position, top left);
+}
+
+/* Fade the bottom of a tall screenshot into the page */
+.mf-frame--fade .mf-frame__body::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 28%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--mf-bg) 100%);
+  pointer-events: none;
+}
+
+/* Inset callout floating over a frame (e.g. a status chip or crop) */
+.mf-frame-callout {
+  position: absolute;
+  z-index: var(--mf-z-raised);
+  padding: var(--mf-space-3) var(--mf-space-4);
+  background: var(--mf-surface);
+  border: 1px solid var(--mf-line);
+  border-radius: var(--mf-radius-md);
+  box-shadow: var(--mf-shadow-md);
+}
+
+/* Blur box for redacting real client data inside screenshots */
+.mf-redact {
+  position: absolute;
+  border-radius: var(--mf-radius-xs);
+  background: rgba(234, 239, 246, 0.85);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* ==========================================================================
+   8. Status pills
+   ========================================================================== */
+
+/*
+ * <span class="mf-pill mf-pill--warning">Awaiting payment</span>
+ * Add .mf-pill--dotless to drop the leading dot; .mf-pill--live pulses it.
+ */
+.mf-pill {
+  --mf-pill-fg: var(--mf-ink-2);
+  --mf-pill-bg: var(--mf-surface-sunken);
+  --mf-pill-line: var(--mf-line);
+  --mf-pill-dot: var(--mf-ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding-inline: 9px;
+  border: 1px solid var(--mf-pill-line);
+  border-radius: var(--mf-radius-full);
+  background: var(--mf-pill-bg);
+  color: var(--mf-pill-fg);
+  font-family: var(--mf-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.mf-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mf-pill-dot);
+  flex-shrink: 0;
+}
+
+.mf-pill > svg { width: 12px; height: 12px; stroke-width: 2.25; }
+.mf-pill:has(> svg)::before,
+.mf-pill--dotless::before { display: none; }
+
+.mf-pill--info {
+  --mf-pill-fg: var(--mf-blue);
+  --mf-pill-bg: var(--mf-blue-soft);
+  --mf-pill-line: var(--mf-blue-line);
+  --mf-pill-dot: var(--mf-blue);
+}
+
+.mf-pill--success {
+  --mf-pill-fg: var(--mf-success-ink);
+  --mf-pill-bg: var(--mf-success-soft);
+  --mf-pill-line: #C5EBD9;
+  --mf-pill-dot: var(--mf-success);
+}
+
+.mf-pill--warning {
+  --mf-pill-fg: var(--mf-warning-ink);
+  --mf-pill-bg: var(--mf-warning-soft);
+  --mf-pill-line: #FBE1B0;
+  --mf-pill-dot: var(--mf-warning);
+}
+
+.mf-pill--danger {
+  --mf-pill-fg: var(--mf-danger-ink);
+  --mf-pill-bg: var(--mf-danger-soft);
+  --mf-pill-line: #F8CDCE;
+  --mf-pill-dot: var(--mf-danger);
+}
+
+/* Locked — ink on white, reads as "secured", not as an error */
+.mf-pill--locked {
+  --mf-pill-fg: var(--mf-ink);
+  --mf-pill-bg: var(--mf-surface);
+  --mf-pill-line: var(--mf-line-strong);
+  --mf-pill-dot: var(--mf-ink);
+}
+
+/* Pending — neutral with a hollow ring: waiting, not alarming */
+.mf-pill--pending {
+  --mf-pill-fg: var(--mf-ink-2);
+  --mf-pill-bg: var(--mf-surface);
+  --mf-pill-line: var(--mf-line-strong);
+}
+
+.mf-pill--pending::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--mf-ink-3);
+}
+
+.mf-pill--sm { height: 20px; padding-inline: 7px; font-size: 11px; }
+
+.mf-pill--live::before {
+  box-shadow: 0 0 0 0 var(--mf-pill-dot);
+  animation: mfPillPulse 2s var(--mf-ease-out) infinite;
+}
+
+@keyframes mfPillPulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--mf-pill-dot) 45%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--mf-pill-dot) 0%, transparent); }
+}
+
+/* ==========================================================================
+   9. Borders & rules
+   ========================================================================== */
+
+.mf-rule {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--mf-line);
+}
+
+.mf-rule--vertical {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+}
+
+.mf-border { border: 1px solid var(--mf-line); }
+.mf-border-top { border-top: 1px solid var(--mf-line); }
+.mf-border-bottom { border-bottom: 1px solid var(--mf-line); }
+
+/* Key/value row list, e.g. invoice or file metadata */
+.mf-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--mf-line);
+}
+
+.mf-list > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mf-space-4);
+  padding-block: var(--mf-space-4);
+  border-bottom: 1px solid var(--mf-line);
+  font-size: var(--mf-text-small);
+  color: var(--mf-ink-2);
+}
+
+/* Focus ring for any custom interactive element */
+.mf-focus:focus-visible {
+  outline: none;
+  box-shadow: var(--mf-shadow-focus);
+}
+
+/* ==========================================================================
+   10. Accent effects — restrained, one per view
+   ========================================================================== */
+
+/* Thin blue→cyan hairline. Use as a top edge on a highlighted frame or card. */
+.mf-accent-edge { position: relative; }
+
+.mf-accent-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--mf-gradient-accent);
+  z-index: var(--mf-z-raised);
+}
+
+/* Standalone accent line, e.g. under a label or as a progress track */
+.mf-accent-line {
+  display: block;
+  height: 2px;
+  width: 48px;
+  border-radius: var(--mf-radius-full);
+  background: var(--mf-gradient-accent);
+}
+
+/* Soft brand light behind a product frame. Place on the wrapper. */
+.mf-glow { position: relative; isolation: isolate; }
+
+.mf-glow::before {
+  content: "";
+  position: absolute;
+  inset: -12% -8% -20%;
+  z-index: -1;
+  background:
+    radial-gradient(50% 45% at 30% 40%, rgba(0, 91, 221, 0.10), transparent 70%),
+    radial-gradient(40% 40% at 75% 60%, rgba(0, 199, 255, 0.10), transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* Faint engineering grid, masked to fade out. For hero/section backgrounds. */
+.mf-grid-bg { position: relative; isolation: isolate; }
+
+.mf-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, var(--mf-line-ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mf-line-ink) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Glass — only for overlays sitting on top of product imagery */
+.mf-glass {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 1px var(--mf-line-ink), var(--mf-shadow-md);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+}
+
+/* Blue tint surface — for a single emphasized band or callout */
+.mf-tint {
+  background: var(--mf-blue-soft);
+  border: 1px solid var(--mf-blue-line);
+}
+
+/* ==========================================================================
+   11. Reveal motion
+   ========================================================================== */
+
+/* Toggled by the IntersectionObserver in landing.js (adds .is-revealed). */
+.mf-reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity var(--mf-duration-slow) var(--mf-ease-out),
+    transform var(--mf-duration-slow) var(--mf-ease-out);
+  transition-delay: calc(var(--mf-reveal-order, 0) * 80ms);
+}
+
+.mf-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .mf-btn,
+  .mf-btn__icon,
+  .mf-card--interactive { transition: none; }
+
+  .mf-pill--live::before { animation: none; }
+}
+
+/* ==========================================================================
+   12. Site navigation
+   ========================================================================== */
+
+/*
+ * Sticky header. Clean at the top of the page; .is-scrolled (set by landing.js)
+ * adds a light blur and hairline. Height feeds --header-height in landing.css,
+ * which sticky sections and anchor offsets rely on.
+ */
+.mf-nav {
+  --mf-nav-h: 72px;
+  position: sticky;
+  top: 0;
+  z-index: var(--mf-z-nav);
+  height: var(--mf-nav-h);
+  background: var(--mf-bg);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--mf-duration) ease,
+    border-color var(--mf-duration) ease;
+}
+
+.mf-nav.is-scrolled {
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom-color: var(--mf-line);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+}
+
+/* Menu open: solid, so the panel reads as one surface with the bar */
+.mf-nav.is-open {
+  background: var(--mf-bg);
+  border-bottom-color: var(--mf-line);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.mf-nav__inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.mf-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 48px;
+  border-radius: var(--mf-radius-xs);
+}
+
+.mf-nav__brand img {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
+.mf-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.mf-nav__link,
+.mf-nav__login {
+  position: relative;
+  font-family: var(--mf-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.006em;
+  color: var(--mf-ink-2);
+  text-decoration: none;
+  border-radius: var(--mf-radius-xs);
+  transition: color var(--mf-duration-fast) ease;
+}
+
+.mf-nav__link:hover,
+.mf-nav__login:hover { color: var(--mf-ink); }
+
+/* Hairline that draws in under the hovered link */
+.mf-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--mf-duration) var(--mf-ease-out);
+}
+
+.mf-nav__link:hover::after { transform: scaleX(1); }
+
+.mf-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+}
+
+.mf-nav__login { color: var(--mf-ink); }
+
+.mf-nav__brand:focus-visible,
+.mf-nav__link:focus-visible,
+.mf-nav__login:focus-visible,
+.mf-nav__toggle:focus-visible,
+.mf-nav__panel-links a:focus-visible {
+  outline: none;
+  box-shadow: var(--mf-shadow-focus);
+}
+
+/* Menu toggle — two bars that cross into an X */
+.mf-nav__toggle {
+  display: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--mf-radius-sm);
+  background: transparent;
+  color: var(--mf-ink);
+  cursor: pointer;
+}
+
+.mf-nav__toggle:hover { background: var(--mf-surface-sunken); }
+
+.mf-nav__toggle-bars,
+.mf-nav__toggle-bars::before {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: transform var(--mf-duration) var(--mf-ease-out);
+}
+
+.mf-nav__toggle-bars {
+  position: relative;
+  transform: translateY(-3px);
+}
+
+.mf-nav__toggle-bars::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+
+.mf-nav__toggle[aria-expanded="true"] .mf-nav__toggle-bars { transform: translateY(0) rotate(45deg); }
+.mf-nav__toggle[aria-expanded="true"] .mf-nav__toggle-bars::before { transform: translateY(-6px) rotate(-90deg); }
+
+/* Mobile panel — drops below the bar, page scroll is locked while open */
+.mf-nav__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: calc(100dvh - var(--mf-nav-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--mf-bg);
+  border-bottom: 1px solid var(--mf-line);
+  box-shadow: 0 24px 48px -24px rgba(11, 18, 32, 0.18);
+}
+
+.mf-nav__panel[hidden] { display: none; }
+
+.mf-nav__panel-links {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 0;
+}
+
+.mf-nav__panel-links li + li { border-top: 1px solid var(--mf-line); }
+
+.mf-nav__panel-links a {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  font-family: var(--mf-font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--mf-ink);
+  text-decoration: none;
+  border-radius: var(--mf-radius-xs);
+}
+
+.mf-nav__panel-actions {
+  display: grid;
+  gap: 12px;
+  padding: 16px 0 24px;
+  border-top: 1px solid var(--mf-line);
+}
+
+@media (max-width: 960px) {
+  .mf-nav__links,
+  .mf-nav__login { display: none; }
+
+  .mf-nav__toggle { display: grid; }
+
+  .mf-nav__actions { gap: 12px; }
+}
+
+@media (min-width: 961px) {
+  .mf-nav__panel { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  /* html:root outranks landing.css's :root, which loads later */
+  html:root { --header-height: 64px; }
+
+  .mf-nav { --mf-nav-h: 64px; }
+
+  .mf-nav__brand img { height: 24px; }
+}
+
+/* Small phones: CTA moves into the panel to keep the bar uncluttered */
+@media (max-width: 479px) {
+  .mf-nav__cta { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-nav,
+  .mf-nav__link::after,
+  .mf-nav__toggle-bars,
+  .mf-nav__toggle-bars::before { transition: none; }
+}

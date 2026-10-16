@@ -67,7 +67,6 @@ body {
 }
 
 /* ─── BACKGROUND CONFIG ─── */
-.hero-section,
 .success-screen {
   background-image: url('/assets/bgd.png');
   background-size: cover;
@@ -75,7 +74,6 @@ body {
   background-repeat: no-repeat;
 }
 
-.hero-section::before,
 .success-screen::before {
   content: "";
   position: absolute;
@@ -85,35 +83,10 @@ body {
   z-index: 0;
 }
 
-/* ─── HERO SECTION ─── */
-.hero-section {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--bg);
-  overflow: hidden;
-  transition: opacity 350ms ease;
-  z-index: 20;
-}
-
-.hero-section.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .onboarding-layout {
-  display: none;
+  display: flex;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 500ms ease;
-}
-
-.onboarding-layout.fade-in {
-  opacity: 1;
 }
 
 .visually-hidden {
@@ -126,64 +99,6 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-/* Background Elements */
-.hero-bg-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: float 10s ease-in-out infinite;
-}
-
-.blob-1 {
-  width: 300px;
-  height: 300px;
-  background: var(--primary-light);
-  top: -100px;
-  left: -100px;
-}
-
-.blob-2 {
-  width: 250px;
-  height: 250px;
-  background: rgba(0, 199, 255, 0.12);
-  bottom: 0;
-  right: 0;
-  animation-delay: -5s;
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-/* Hero Content */
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  text-align: center;
-  padding: 0 24px;
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeUp {
@@ -213,10 +128,6 @@ body {
   margin-bottom: 16px;
 }
 
-.hero-title .highlight {
-  color: var(--primary);
-}
-
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--text-secondary);
@@ -227,27 +138,6 @@ body {
 
 .success-screen .hero-subtitle {
   margin-bottom: 0; /* Clear boundary natively for tight line rhythms */
-}
-
-.hero-cta {
-  font-size: 1.125rem;
-  padding: 16px 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 91, 221, 0.2);
-  transition: all 300ms ease;
-  font-weight: 600;
-}
-
-.hero-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 91, 221, 0.3);
-}
-
-.hero-cta-subtext {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin-top: 16px;
-  font-weight: 500;
 }
 
 /* ─── LAYOUT ─── */
@@ -266,8 +156,9 @@ body {
 }
 
 .brand-logo {
-  max-height: 64px;
+  height: 24px;
   width: auto;
+  max-width: 100%;
   display: block;
 }
 
@@ -840,7 +731,6 @@ select {
 /* ─── RESPONSIVE ─── */
 @media (max-width: 800px) {
 
-  .hero-section,
   .success-screen {
     background-image: url('/assets/bgm.png');
     background-size: cover;
@@ -863,17 +753,12 @@ select {
     overflow-y: auto;
   }
 
-  .hero-section,
   .success-screen {
     align-items: center;
     padding: 32px 20px 100px;
     /* Pads 100px bottom clearing the absolute footer perfectly */
     height: auto;
     min-height: 100vh;
-  }
-
-  .hero-content {
-    margin-top: 0;
   }
 
   .onboarding-layout {
@@ -977,4 +862,90 @@ select {
 
 .blog-page .site-footer {
   position: relative;
+}
+
+/* ─── THEME (shared light/dark preference with the main site) ─── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0B0D11;
+  --surface: #161920;
+  --border: #323743;
+  --line-soft: #22262E;
+  --neutral: #B6BBC5;
+  --text-main: #EDEFF3;
+  --text-secondary: #B6BBC5;
+  --text-muted: #8B919C;
+  --primary-light: rgba(116, 171, 255, 0.12);
+}
+
+:root[data-theme="dark"] .step-item.completed .step-marker { color: #74ABFF; }
+
+:root[data-theme="dark"] .success-screen::before { background: rgba(11, 13, 17, 0.88); }
+
+:root[data-theme="dark"] .tooltip-text { color: #0B0D11; }
+
+.logo--on-dark { display: none !important; }
+:root[data-theme="dark"] .logo--on-light { display: none !important; }
+:root[data-theme="dark"] .logo--on-dark { display: block !important; }
+
+/* Top bar: home link + theme toggle */
+.prereg-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  pointer-events: none;
+}
+
+.prereg-bar > * { pointer-events: auto; }
+
+.prereg-bar__home img { height: 24px; width: auto; }
+
+/* The onboarding sidebar shows its own logo; the bar's logo is only for the success screen */
+body:not(:has(#successScreen[style*="flex"])) .prereg-bar__home { visibility: hidden; }
+
+.brand-link { display: inline-block; border-radius: 6px; }
+.brand-link:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+
+.prereg-theme {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.prereg-theme:hover { color: var(--text-main); border-color: var(--text-muted); }
+.prereg-theme:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.prereg-theme .icon-sun { display: none; }
+:root[data-theme="dark"] .prereg-theme .icon-sun { display: block; }
+:root[data-theme="dark"] .prereg-theme .icon-moon { display: none; }
+
+@media (max-width: 800px) {
+  .prereg-bar { position: absolute; padding: 14px 16px; }
+}
+
+/* Sidebar logo: centred over the stepper, level with the theme toggle */
+.stepper-sidebar { padding-top: 24px; }
+.stepper-sidebar .brand-link { align-self: center; }
+.stepper-sidebar .vertical-stepper { margin-top: 64px; }
+
+@media (max-width: 800px) {
+  /* Phone/tablet portrait: logo left, toggle right, steps underneath */
+  .stepper-sidebar { padding: 23px 20px 16px; }
+  .stepper-sidebar .brand-link { align-self: flex-start; }
+  .stepper-sidebar .brand-logo { height: 22px; }
+  .stepper-sidebar .vertical-stepper { margin-top: 28px; }
 }

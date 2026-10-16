@@ -26,6 +26,16 @@
       "source": "/blog/index.html",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/store/index.html",
+      "destination": "/store/",
+      "permanent": true
+    },
+    {
+      "source": "/freelancers/index.html",
+      "destination": "/freelancers/",
+      "permanent": true
     }
   ]
 }

@@ -34,94 +34,298 @@
   }
 
   /* ==========================================================================
-     1. Mobile Menu Drawer
+     1. Navigation: scroll state + mobile menu
      ========================================================================== */
-  const menuToggle = document.getElementById("mobile-menu-toggle");
-  const mobileDrawer = document.getElementById("mobile-drawer");
+  const nav = document.getElementById("mf-nav");
+  const navToggle = document.getElementById("mf-nav-toggle");
+  const navPanel = document.getElementById("mf-nav-panel");
 
-  if (menuToggle && mobileDrawer) {
-    function toggleDrawer(force) {
-      const isOpen = force !== undefined ? force : !mobileDrawer.classList.contains("is-open");
-      mobileDrawer.classList.toggle("is-open", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      const icon = menuToggle.querySelector("i");
-      if (icon) {
-        icon.setAttribute("data-lucide", isOpen ? "x" : "menu");
-        initIcons();
+  if (nav) {
+    // Clean at the top; blur + hairline once the page moves
+    let navTicking = false;
+    function updateNavScrollState() {
+      nav.classList.toggle("is-scrolled", (window.scrollY || window.pageYOffset) > 8);
+      navTicking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!navTicking) {
+        navTicking = true;
+        requestAnimationFrame(updateNavScrollState);
+      }
+    }, { passive: true });
+    updateNavScrollState();
+  }
+
+  if (nav && navToggle && navPanel) {
+    const desktopQuery = window.matchMedia("(min-width: 961px)");
+
+    function isMenuOpen() {
+      return navToggle.getAttribute("aria-expanded") === "true";
+    }
+
+    function setMenu(open, options) {
+      const restoreFocus = !options || options.restoreFocus !== false;
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      navPanel.hidden = !open;
+      nav.classList.toggle("is-open", open);
+      document.documentElement.style.overflow = open ? "hidden" : "";
+
+      if (open) {
+        const firstLink = navPanel.querySelector("a");
+        if (firstLink) firstLink.focus();
+      } else if (restoreFocus) {
+        navToggle.focus();
       }
     }
 
-    menuToggle.addEventListener("click", function () {
-      toggleDrawer();
+    navToggle.addEventListener("click", function () {
+      setMenu(!isMenuOpen());
     });
 
-    mobileDrawer.querySelectorAll("a").forEach(function (link) {
+    // Following a link closes the menu; focus moves with the page, not back to the toggle
+    navPanel.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        toggleDrawer(false);
+        setMenu(false, { restoreFocus: false });
       });
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && mobileDrawer.classList.contains("is-open")) {
-        toggleDrawer(false);
+      if (!isMenuOpen()) return;
+
+      if (e.key === "Escape") {
+        setMenu(false);
+        return;
       }
+
+      // Keep Tab cycling between the toggle and the panel while open
+      if (e.key === "Tab") {
+        const focusables = [navToggle].concat(Array.prototype.slice.call(navPanel.querySelectorAll("a")));
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Tapping outside the header closes the menu
+    document.addEventListener("click", function (e) {
+      if (isMenuOpen() && !nav.contains(e.target)) setMenu(false, { restoreFocus: false });
+    });
+
+    // Growing past the breakpoint hides the panel via CSS; reset state to match
+    desktopQuery.addEventListener("change", function (e) {
+      if (e.matches && isMenuOpen()) setMenu(false, { restoreFocus: false });
     });
   }
 
   /* ==========================================================================
-     2. Hero Section: Mouse 3D Perspective & Scroll Scrub
+     2. Hero: scroll story — scattered delivery collapses into a MitFloww workspace
+     Progress p (0 → 1) across the pinned scroll track drives:
+       0.00–0.26  copy lifts away
+       0.00–0.40  cards drift by depth, then crowd inward; versions overlap
+       0.22       revision / payment / link states appear ("exposed")
+       0.36–0.75  cards straighten and fly into their workspace slots (staggered)
+       0.54–0.74  workspace frame materialises; its labels follow at 0.66–0.82
+       0.70–0.91  each card cross-fades into its real UI counterpart
+     Large screens only; smaller screens and reduced motion get the static layout.
      ========================================================================== */
-  const heroSection = document.getElementById("hero-section");
-  const heroProductStage = document.getElementById("hero-product-stage");
+  const hero = document.getElementById("hero-section");
 
-  if (heroSection && heroProductStage) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentRotateX = 0;
-    let currentRotateY = 0;
-    let isHoveringHero = false;
+  if (hero && hero.classList.contains("mf-hero")) {
+    const stage = hero.querySelector(".mf-hero__stage");
+    const copy = hero.querySelector(".mf-hero__copy");
+    const workspace = hero.querySelector(".mf-ws");
+    const caption = hero.querySelector(".mf-hero__caption");
+    const cinematicQuery = window.matchMedia("(min-width: 1024px) and (min-height: 620px)");
 
-    heroSection.addEventListener("mousemove", function (e) {
-      isHoveringHero = true;
-      const rect = heroSection.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      // Controlled, responsive subtle tilt
-      mouseY = ((y / rect.height) - 0.5) * -7;
-      mouseX = ((x / rect.width) - 0.5) * 7;
-    });
+    const cards = Array.prototype.map.call(hero.querySelectorAll(".mf-artifact"), function (el, i) {
+      const read = function (prop) { return parseFloat(el.style.getPropertyValue(prop)) || 0; };
+      return {
+        el: el,
+        i: i,
+        slot: hero.querySelector('[data-slot="' + el.getAttribute("data-target") + '"]'),
+        overlap: el.hasAttribute("data-overlap") ? Number(el.getAttribute("data-overlap")) : null,
+        stack: el.classList.contains("mf-artifact--stack"),
+        sx: read("--sx"),
+        sy: read("--sy"),
+        r: read("--r"),
+        d: read("--d")
+      };
+    }).filter(function (card) { return card.slot; });
 
-    heroSection.addEventListener("mouseleave", function () {
-      isHoveringHero = false;
-      mouseX = 0;
-      mouseY = 0;
-    });
+    const clamp01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    const span = function (p, a, b) { return clamp01((p - a) / (b - a)); };
+    const lerp = function (a, b, t) { return a + (b - a) * t; };
+    // Symmetric cubic: slow start, slow landing, no overshoot
+    const easeInOut = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    const easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
 
-    function updateHeroDepth() {
-      if (!isHoveringHero) {
-        currentRotateX += (0 - currentRotateX) * 0.08;
-        currentRotateY += (0 - currentRotateY) * 0.08;
-      } else {
-        currentRotateX += (mouseY - currentRotateX) * 0.08;
-        currentRotateY += (mouseX - currentRotateY) * 0.08;
+    const DRIFT_Y = 70;      // px of upward parallax at full depth
+    const CROWD = 0.16;      // share of the distance to centre cards close as disorder grows
+
+    let cinematic = false;
+    let target = 0;
+    let current = 0;
+    let running = false;
+    let phase = "";
+
+    function setPhase(next) {
+      if (next !== phase) {
+        phase = next;
+        hero.setAttribute("data-phase", next);
       }
-
-      // Scroll scrub for hero as user leaves the top
-      const scrollY = window.scrollY || window.pageYOffset;
-      const heroHeight = heroSection.offsetHeight || 800;
-      const heroProgress = Math.min(Math.max(scrollY / heroHeight, 0), 1);
-      const heroScale = 1 - (heroProgress * 0.05);
-
-      heroProductStage.style.transform = `perspective(1400px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) scale(${heroScale.toFixed(3)})`;
-
-      if (!reduceMotion) requestAnimationFrame(updateHeroDepth);
     }
 
-    if (!reduceMotion) {
-      requestAnimationFrame(updateHeroDepth);
-    } else {
-      heroProductStage.style.transform = "";
+    // Scattered "home" positions come from --sx/--sy (fractions of the stage half-size);
+    // landing positions are the live rects of each card's workspace slot.
+    function measure() {
+      const W = stage.clientWidth;
+      const H = stage.clientHeight;
+      const stageRect = stage.getBoundingClientRect();
+      const prevTransform = workspace.style.transform;
+      workspace.style.transform = "none";
+
+      cards.forEach(function (card) {
+        card.w = card.el.offsetWidth;
+        card.h = card.el.offsetHeight;
+        card.hx = W / 2 + card.sx * W / 2;
+        card.hy = H / 2 + card.sy * H / 2;
+        const rect = card.slot.getBoundingClientRect();
+        card.tx = rect.left - stageRect.left + rect.width / 2;
+        card.ty = rect.top - stageRect.top + rect.height / 2;
+        // Uniform scale toward the slot size, clamped so text never balloons or shrinks to noise;
+        // the cross-fade covers the remaining size difference
+        card.ts = Math.min(Math.max(Math.min(rect.width / card.w, rect.height / card.h), 0.75), 1.15);
+      });
+
+      workspace.style.transform = prevTransform;
     }
+
+    function readProgress() {
+      const stickyTop = parseFloat(window.getComputedStyle(stage).top) || 0;
+      const distance = hero.offsetHeight - stage.offsetHeight;
+      if (distance <= 0) return 0;
+      return clamp01((stickyTop - hero.getBoundingClientRect().top) / distance);
+    }
+
+    function render(p) {
+      const copyOut = easeOut(span(p, 0.04, 0.26));
+      copy.style.opacity = (1 - copyOut).toFixed(3);
+      copy.style.transform = "translate3d(0," + (-56 * copyOut).toFixed(1) + "px,0)";
+      copy.style.visibility = copyOut > 0.99 ? "hidden" : "";
+      copy.style.pointerEvents = copyOut > 0.4 ? "none" : "";
+
+      const drift = span(p, 0, 0.4);
+      const chaos = easeInOut(span(p, 0.1, 0.4));
+      const frame = easeInOut(span(p, 0.54, 0.74));
+      const W = stage.clientWidth;
+      const H = stage.clientHeight;
+
+      // Scattered position: depth parallax, then crowding toward the centre
+      function looseX(card) { return lerp(card.hx, W / 2, CROWD * card.d * chaos); }
+      function looseY(card) { return lerp(card.hy - card.d * DRIFT_Y * drift, H / 2, CROWD * card.d * chaos); }
+
+      cards.forEach(function (card) {
+        const align = easeInOut(span(p, 0.36 + card.i * 0.012, 0.63 + card.i * 0.012));
+        const settle = span(p, 0.7 + card.i * 0.008, 0.82 + card.i * 0.008);
+
+        let x = looseX(card);
+        let y = looseY(card);
+
+        // A newer version slides on top of the one it replaces
+        if (card.overlap !== null && cards[card.overlap]) {
+          const base = cards[card.overlap];
+          x = lerp(x, looseX(base) + 28, chaos);
+          y = lerp(y, looseY(base) + 24, chaos);
+        }
+
+        const rotation = card.r * (1 + 0.7 * chaos) * (1 - align);
+        const scale = lerp(1, card.ts, align);
+        const cx = lerp(x, card.tx, align);
+        const cy = lerp(y, card.ty, align);
+
+        card.el.style.transform =
+          "translate3d(" + (cx - card.w / 2).toFixed(1) + "px," + (cy - card.h / 2).toFixed(1) + "px,0)" +
+          " rotate(" + rotation.toFixed(2) + "deg) scale(" + scale.toFixed(4) + ")";
+        card.el.style.opacity = (1 - settle).toFixed(3);
+        card.slot.style.opacity = settle.toFixed(3);
+
+        if (card.stack) card.el.style.setProperty("--spread", (chaos * (1 - align)).toFixed(3));
+      });
+
+      workspace.style.opacity = frame.toFixed(3);
+      workspace.style.setProperty("--mf-ws-content", easeInOut(span(p, 0.66, 0.82)).toFixed(3));
+      workspace.style.transform =
+        "translate3d(0," + ((1 - frame) * 28).toFixed(1) + "px,0) scale(" + (0.975 + 0.025 * frame).toFixed(4) + ")";
+
+      if (caption) caption.style.opacity = span(p, 0.12, 0.24).toFixed(3);
+
+      setPhase(p < 0.22 ? "scattered" : p < 0.6 ? "exposed" : "organized");
+    }
+
+    // Progress eases toward the scroll position for a weighted, physical feel
+    function tick() {
+      current += (target - current) * 0.1;
+      if (Math.abs(target - current) < 0.0004) current = target;
+      render(current);
+      if (current !== target) {
+        requestAnimationFrame(tick);
+      } else {
+        running = false;
+      }
+    }
+
+    function onScroll() {
+      if (!cinematic) return;
+      target = readProgress();
+      if (!running) {
+        running = true;
+        requestAnimationFrame(tick);
+      }
+    }
+
+    function clearInline() {
+      [copy, workspace, caption].forEach(function (el) { if (el) el.removeAttribute("style"); });
+      cards.forEach(function (card) {
+        card.el.style.transform = "";
+        card.el.style.opacity = "";
+        card.el.style.removeProperty("--spread");
+        card.slot.style.opacity = "";
+      });
+    }
+
+    function setMode() {
+      cinematic = cinematicQuery.matches && !reduceMotion;
+      hero.classList.toggle("is-cinematic", cinematic);
+      clearInline();
+
+      if (cinematic) {
+        measure();
+        target = current = readProgress();
+        render(current);
+      } else {
+        setPhase("organized");
+      }
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(setMode, 120);
+    }, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    cinematicQuery.addEventListener("change", setMode);
+
+    setMode();
+    // Card sizes depend on web fonts and icons; re-measure once both are in
+    window.addEventListener("load", setMode, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setMode);
   }
 
   /* ==========================================================================
@@ -419,7 +623,7 @@
      10. Scroll Reveal Animations (High-Performance IntersectionObserver)
      ========================================================================== */
   function initScrollReveal() {
-    const revealElements = document.querySelectorAll(".reveal-up, [data-reveal]");
+    const revealElements = document.querySelectorAll(".reveal-up, [data-reveal], .mf-reveal");
     if (!revealElements.length) return;
 
     if ("IntersectionObserver" in window) {

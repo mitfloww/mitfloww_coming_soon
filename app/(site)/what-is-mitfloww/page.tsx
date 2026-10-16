@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { ArticlePage } from "@/components/site/ArticlePage";
+import { articleMetadata, getArticle } from "@/lib/content";
+
+/* Served at /what-is-mitfloww.html (see the rewrite in next.config.ts). */
+const article = getArticle("what-is-mitfloww")!;
+
+export const metadata: Metadata = articleMetadata(article);
+
+export default function Page() {
+  return <ArticlePage article={article} />;
+}

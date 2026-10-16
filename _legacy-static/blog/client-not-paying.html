@@ -9,7 +9,14 @@
   <link rel="canonical" href="https://www.mitfloww.com/blog/client-not-paying.html" />
   <meta property="og:url" content="https://www.mitfloww.com/blog/client-not-paying.html" />
 
-  <link rel="stylesheet" href="../style.css" />
+  <!-- site-head:start -->
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){var d=document.documentElement,t;try{t=localStorage.getItem('mf-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.setAttribute('data-theme',t);d.classList.add('js');setTimeout(function(){if(!window.__mfReady)d.classList.remove('js')},3000)})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Manrope:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="/site.css">
+  <!-- site-head:end -->
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
@@ -44,41 +51,85 @@
 
 </head>
 
-<body class="blog-page" style="font-family:Inter,system-ui;background:#FCFDFE;margin:0;padding:40px 20px;color:#111827;">
-  <div style="max-width:760px;margin:auto;">
+<body class="page-article">
+  <!-- site-header:start -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="/" class="brand" aria-label="MitFloww home">
+        <img class="logo--on-light" src="/assets/logo/SVG/horizontal/mitfloww-logo-horizontal-color-black-wordmark.svg" alt="MitFloww" width="128" height="24">
+        <img class="logo--on-dark" src="/assets/logo/SVG/horizontal/mitfloww-logo-horizontal-color-white-wordmark.svg" alt="MitFloww" width="128" height="24">
+      </a>
 
-    <div style="margin-bottom:24px;">
-      <a href="./" style="text-decoration:none;color:#6B7280;">← Back to Blog</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/#features" data-nav="product">Product</a>
+        <a href="/#how-it-works" data-nav="how">How it works</a>
+        <a href="/store/" data-nav="store">Assets Store</a>
+        <a href="/freelancers/" data-nav="freelancers">Find a Freelancer</a>
+        <a href="/blog/" data-nav="blog" aria-current="page">Blog</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Switch theme" aria-pressed="false">
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg>
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        </button>
+        <a href="/preregister/" class="btn btn--ink btn--sm site-header__cta">Join Waitlist</a>
+        <button type="button" class="icon-btn menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg class="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+          <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <nav aria-label="Mobile">
+      <a href="/#features">Product <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/#how-it-works">How it works <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/store/">Assets Store <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/freelancers/">Find a Freelancer <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/blog/">Blog <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <a href="/preregister/" class="btn btn--ink btn--lg btn--block">Join Waitlist</a>
+    </div>
+  </div>
+  <!-- site-header:end -->
+  <main id="main" class="article">
+
+    <div class="back-link">
+      <a href="./">← Back to Blog</a>
     </div>
 
-    <header style="margin-bottom:34px;">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #E5E7EB;border-radius:999px;background:#fff;margin-bottom:16px;">
-        <span style="width:8px;height:8px;border-radius:999px;background:#29ABE2;"></span>
-        <span style="font-size:.82rem;color:#4B5563;">Client risk</span>
+    <header>
+      <div class="pill-label">
+        <span class="dot"></span>
+        <span>Client risk</span>
       </div>
 
-      <h1 style="font-size:clamp(2.1rem,5vw,3.1rem);font-weight:800;">
+      <h1>
         Client Not Paying After Delivery?
       </h1>
 
-      <p style="color:#4B5563;">
+      <p>
         The issue is rarely just the client. It is the workflow that gives away control too early.
       </p>
     </header>
 
-    <article style="line-height:1.9;">
+    <article>
 
       <p>Many freelancers complete the work, deliver the files, and then wait for payment. At that point, leverage is already lost.</p>
 
-      <h2 style="margin-top:32px;">What actually goes wrong</h2>
-      <ul style="padding-left:22px;">
+      <h2>What actually goes wrong</h2>
+      <ul>
         <li><strong>Delivery before payment:</strong> The client already has full value</li>
         <li><strong>No urgency:</strong> Payment becomes optional, not required</li>
         <li><strong>Follow-up dependency:</strong> You have to chase instead of close</li>
       </ul>
 
-      <h2 style="margin-top:32px;">Why chasing rarely works</h2>
-      <ul style="padding-left:22px;">
+      <h2>Why chasing rarely works</h2>
+      <ul>
         <li>Clients delay intentionally or unintentionally</li>
         <li>Other priorities take over</li>
         <li>Some clients disengage completely</li>
@@ -86,48 +137,96 @@
 
       <p>At this stage, the problem is no longer technical—it is structural.</p>
 
-      <h2 style="margin-top:32px;">Traditional vs controlled workflow</h2>
-      <ul style="padding-left:22px;">
+      <h2>Traditional vs controlled workflow</h2>
+      <ul>
         <li><strong>Traditional:</strong> Deliver files → Request payment</li>
         <li><strong>Controlled:</strong> Request payment → Unlock files</li>
       </ul>
 
       <p>The second model ensures payment is not a follow-up action—it is a prerequisite.</p>
 
-      <h2 style="margin-top:32px;">How to prevent non-payment</h2>
-      <ol style="padding-left:22px;">
+      <h2>How to prevent non-payment</h2>
+      <ol>
         <li>Prepare final files but keep them restricted</li>
         <li>Share a controlled access link instead of direct files</li>
         <li>Unlock access only after payment is completed</li>
       </ol>
 
-      <h2 style="margin-top:32px;">Common mistakes</h2>
-      <ul style="padding-left:22px;">
+      <h2>Common mistakes</h2>
+      <ul>
         <li>Sending full files “just for review”</li>
         <li>Relying on trust instead of process</li>
         <li>Using tools that allow unrestricted downloads</li>
       </ul>
 
-      <h2 style="margin-top:32px;">Better approach</h2>
-      <p style="font-weight:600;">
+      <h2>Better approach</h2>
+      <p class="is-strong">
         Use a system where files stay locked until payment is confirmed. This ensures you retain control until the transaction is complete.
       </p>
 
-      <p style="margin-top:28px;">
+      <p>
         Freelancers do not usually lose money because of a single bad client. They lose money because their workflow allows it.
       </p>
 
     </article>
 
-    <footer class="site-footer">
-      <p>
-        &copy; 2026 MitFloww • All rights reserved •
-        <a href="/what-is-mitfloww.html" class="footer-link">About</a> • 
-        <a href="https://www.mitfloww.com/" class="footer-link">Home</a> •
-        <a href="https://www.mitfloww.com/mitfloww-review.html" class="footer-link">Review</a>
-      </p>
-    </footer>
+    <aside class="article-aside" aria-label="About MitFloww">
+      <p class="eyebrow">MitFloww</p>
+      <p>MitFloww keeps client reviews, revisions, payments and final file delivery in one project, so final files are released on your terms.</p>
+      <div class="actions">
+        <a href="/preregister/" class="btn btn--primary">Join Waitlist</a>
+        <a href="/blog/" class="btn btn--secondary">More articles</a>
+      </div>
+    </aside>
+  </main>
 
-  </div>
+  <!-- site-footer:start -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="/" class="brand" aria-label="MitFloww home">
+            <img class="logo--on-light" src="/assets/logo/SVG/horizontal/mitfloww-logo-horizontal-color-black-wordmark.svg" alt="MitFloww" width="138" height="26" loading="lazy">
+            <img class="logo--on-dark" src="/assets/logo/SVG/horizontal/mitfloww-logo-horizontal-color-white-wordmark.svg" alt="MitFloww" width="138" height="26" loading="lazy">
+          </a>
+          <p>The controlled delivery workflow for freelancers and independent creative studios.</p>
+        </div>
+
+        <div>
+          <h2>Product</h2>
+          <ul role="list">
+            <li><a href="/#how-it-works">How it works</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#who-its-for">Who it's for</a></li>
+            <li><a href="/preregister/">Join Waitlist</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Discover</h2>
+          <ul role="list">
+            <li><a href="/store/">Assets Store</a></li>
+            <li><a href="/freelancers/">Find a Freelancer</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Resources</h2>
+          <ul role="list">
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/what-is-mitfloww.html">What is MitFloww?</a></li>
+            <li><a href="/mitfloww-review.html">MitFloww review</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__base">
+        <p>&copy; 2026 MitFloww. All rights reserved.</p>
+        <p>Built for the work behind the work.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- site-footer:end -->
+  <script src="/site.js" defer></script>
 </body>
 </html>

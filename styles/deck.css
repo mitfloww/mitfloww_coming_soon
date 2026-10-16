@@ -1,0 +1,330 @@
+/* ==========================================================================
+   Card deck — colourful 3D cards in the hero that travel to the paths
+   section on wide screens (positions driven by components/home/Intro.tsx).
+   ========================================================================== */
+:root {
+  /* Card paint is the same in both themes, so switching theme never repaints the cards. */
+  --deck-edge: rgba(255, 255, 255, 0.24);
+  --deck-drop: 0 2px 6px rgba(0, 0, 0, 0.12), 0 20px 44px -18px rgba(0, 0, 0, 0.4);
+  --deck-glow: 0.42;
+  --deck-fade: 255 255 255; /* = --bg, as channels for the edge fade */
+}
+:root[data-theme="dark"] {
+  --deck-fade: 11 13 17;
+}
+
+/* Cards that leave sideways are clipped here, never widening the page. */
+.intro { overflow-x: clip; }
+
+/* The hero lets the cards leave it (they travel into the paths section). */
+.hero--deck {
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+  padding-block: clamp(40px, 5vw, 72px) clamp(32px, 4vw, 56px);
+}
+.hero--deck .hero__center { gap: clamp(28px, 3.2vw, 44px); }
+
+/* ---------- Stage (fan) ---------- */
+.deck {
+  position: relative;
+  justify-self: stretch;
+  pointer-events: none;
+  user-select: none;
+}
+
+/*
+ * Wide screens: like the reference, the hero is exactly one screen tall and
+ * the cards rise from its bottom edge, big and spanning the full width, with
+ * the page colour fading them out at both sides and the bottom.
+ */
+@media (min-width: 900px) {
+  .hero--deck {
+    display: flex;
+    flex-direction: column;
+    height: max(calc(100svh - var(--header-h)), 600px);
+    min-height: 0;
+    padding-block: clamp(40px, 8vh, 104px) 0;
+  }
+  .hero--deck .hero__center {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+  }
+  .deck {
+    flex: 1 1 auto;
+    align-self: stretch;
+    min-height: 220px;
+    container-type: size;
+    /* About a quarter of the screen wide, or whatever the space under the CTA allows. */
+    --cw: clamp(160px, min(22.5vw, 96cqh), 400px);
+    --ch: calc(var(--cw) * 1.3);
+  }
+}
+
+.hero__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  background:
+    linear-gradient(90deg, rgb(var(--deck-fade) / 1) 0%, rgb(var(--deck-fade) / 0.92) 0.90%, rgb(var(--deck-fade) / 0.79) 1.80%, rgb(var(--deck-fade) / 0.63) 2.70%, rgb(var(--deck-fade) / 0.47) 3.60%, rgb(var(--deck-fade) / 0.33) 4.50%, rgb(var(--deck-fade) / 0.21) 5.40%, rgb(var(--deck-fade) / 0.12) 6.30%, rgb(var(--deck-fade) / 0.055) 7.20%, rgb(var(--deck-fade) / 0.015) 8.10%, rgb(var(--deck-fade) / 0) 9%, rgb(var(--deck-fade) / 0) 91%, rgb(var(--deck-fade) / 0.015) 91.90%, rgb(var(--deck-fade) / 0.055) 92.80%, rgb(var(--deck-fade) / 0.12) 93.70%, rgb(var(--deck-fade) / 0.21) 94.60%, rgb(var(--deck-fade) / 0.33) 95.50%, rgb(var(--deck-fade) / 0.47) 96.40%, rgb(var(--deck-fade) / 0.63) 97.30%, rgb(var(--deck-fade) / 0.79) 98.20%, rgb(var(--deck-fade) / 0.92) 99.10%, rgb(var(--deck-fade) / 1) 100%),
+    linear-gradient(0deg, rgb(var(--deck-fade) / 1) 0%, rgb(var(--deck-fade) / 0.92) 1.50%, rgb(var(--deck-fade) / 0.79) 3%, rgb(var(--deck-fade) / 0.63) 4.50%, rgb(var(--deck-fade) / 0.47) 6%, rgb(var(--deck-fade) / 0.33) 7.50%, rgb(var(--deck-fade) / 0.21) 9%, rgb(var(--deck-fade) / 0.12) 10.50%, rgb(var(--deck-fade) / 0.055) 12%, rgb(var(--deck-fade) / 0.015) 13.50%, rgb(var(--deck-fade) / 0) 15%);
+  pointer-events: none;
+}
+/* While the cards can travel they hang below the hero: the page colour
+   continues under it, so there's no edge where the fade stops. */
+.hero__fade::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  display: none;
+  height: 60vh;
+  background: rgb(var(--deck-fade));
+}
+@media (min-width: 900px) {
+  .hero__fade { display: block; }
+  .intro[data-travel="on"] .hero__fade::after { display: block; }
+  /* Resting deck (tablets, short screens, before JS): cut the cards at the hero's edge. */
+  .intro:not([data-travel="on"]) .hero--deck { overflow: clip; }
+}
+
+.deck-card {
+  position: absolute;
+  top: clamp(4px, 3cqh, 24px);
+  left: 50%;
+  z-index: var(--z);
+  width: var(--cw);
+  height: var(--ch);
+  margin-left: calc(var(--cw) / -2);
+  transform: translate3d(var(--x), var(--y), 0) perspective(1400px) rotateZ(var(--rz)) rotateY(var(--ry)) scale(var(--s));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.deck-card__in {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* First load: cards slide in one after another from their own side. */
+.js .deck-card__in {
+  animation: deck-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) var(--d) backwards;
+}
+@keyframes deck-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--from), var(--from-y), 0) rotateZ(calc(var(--rz) * 0.6));
+  }
+}
+
+/* ---------- Card face ---------- */
+.deck-face {
+  --r: calc(var(--cw) * 0.085);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--cw) * 0.095) calc(var(--cw) * 0.09) calc(var(--cw) * 0.06);
+  overflow: hidden;
+  border-radius: var(--r);
+  background: linear-gradient(158deg, var(--c1) 0%, var(--c2) 100%);
+  color: #fff;
+  text-align: left;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 0 1px var(--deck-edge),
+    inset 0 calc(var(--cw) * -0.05) calc(var(--cw) * 0.12) rgba(0, 0, 0, 0.07),
+    0 calc(var(--cw) * 0.1) calc(var(--cw) * 0.22) calc(var(--cw) * -0.08) rgb(var(--glow) / var(--deck-glow)),
+    var(--deck-drop);
+}
+
+/* Glossy light from the top-left, like a lacquered card. */
+.deck-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 70% at 12% 0%, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0) 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, 0.06) 100%);
+  pointer-events: none;
+}
+
+.deck-face--back { transform: rotateY(180deg); }
+/* Neighbouring cards overlap: keep titles off the covered side. */
+@media (min-width: 900px) {
+  :is([data-deck-card="0"], [data-deck-card="4"]) .deck-face:not(.deck-face--back) :is(.deck-face__title, .deck-face__sub) { max-width: 64%; overflow-wrap: normal; }
+  [data-deck-card="4"] .deck-face:not(.deck-face--back) :is(.deck-face__title, .deck-face__sub) { margin-left: auto; }
+}
+/* Right-hand cards sit behind their left neighbour: keep their titles in view. */
+@media (min-width: 900px) {
+  .deck-card--right .deck-face:not(.deck-face--back) { text-align: right; }
+}
+.deck-card[data-face="back"] .deck-face:not(.deck-face--back),
+.deck-card[data-face="front"] .deck-face--back { visibility: hidden; }
+
+.deck-face__title,
+.deck-face__sub {
+  position: relative;
+  display: block;
+  overflow-wrap: break-word;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+.deck-face__title {
+  font-family: var(--font-display);
+  font-size: calc(var(--cw) * 0.092);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+html[data-indic] .deck-face__title { font-size: calc(var(--cw) * 0.078); letter-spacing: 0; line-height: 1.3; }
+html[data-indic] .deck-face__sub { font-size: calc(var(--cw) * 0.054); }
+.deck-face__sub {
+  margin-top: 0.4em;
+  font-size: calc(var(--cw) * 0.052);
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0.9;
+}
+.deck-face__art {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: calc(var(--cw) * 0.04);
+}
+.deck-face__art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: calc(var(--cw) * 0.8);
+  filter: drop-shadow(0 calc(var(--cw) * 0.03) calc(var(--cw) * 0.03) rgba(0, 0, 0, 0.14));
+  overflow: visible;
+}
+
+.deck-face--creators  { --c1: #cf92ff; --c2: #7a45ee; --glow: 139 92 246; }
+.deck-face--designers { --c1: #ff9e8c; --c2: #ec4561; --glow: 236 69 97; }
+.deck-face--video     { --c1: #4fd8ef; --c2: #1188c2; --glow: 17 136 194; }
+.deck-face--photo     { --c1: #86e27c; --c2: #1d9a58; --glow: 29 154 88; }
+.deck-face--dev       { --c1: #8590ff; --c2: #3936d4; --glow: 57 54 212; }
+.deck-face--hire      { --c1: #47a0ff; --c2: #0052cc; --glow: 0 82 204; }
+.deck-face--assets    { --c1: #ffc54d; --c2: #f26b12; --glow: 242 107 18; }
+
+/* ---------- Static cards above each path (when the deck doesn't travel) ---------- */
+.paths__card {
+  --cw: clamp(124px, 30vw, 160px);
+  --ch: calc(var(--cw) * 1.3);
+  position: relative;
+  display: none;
+  width: var(--cw);
+  height: var(--ch);
+  margin-bottom: 30px;
+  transform: perspective(1200px) rotateZ(-4deg) rotateY(12deg);
+  pointer-events: none;
+  user-select: none;
+}
+.paths__card--assets { transform: perspective(1200px) rotateZ(4deg) rotateY(-12deg); }
+
+html:not(.js) .paths__card { display: block; }
+@media (max-width: 1199.98px) {
+  .paths__card { display: block; }
+}
+@media (min-width: 1200px) {
+  .intro[data-travel="off"] .paths__card { display: block; }
+}
+
+/* ---------- Phones and small tablets: a swipeable row, no fan ---------- */
+@media (max-width: 899.98px) {
+  .deck {
+    --cw: 148px;
+    --ch: 192px;
+    display: flex;
+    gap: 14px;
+    height: auto;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 10px var(--gutter) 34px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .deck::-webkit-scrollbar { display: none; }
+
+  .deck-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    flex: 0 0 var(--cw);
+    margin: 0;
+    transform: none;
+    will-change: auto;
+    scroll-snap-align: start;
+  }
+  /* Centre the row when it fits; scroll from the first card when it doesn't. */
+  .deck-card:first-child { margin-left: auto; }
+  .deck-card:last-child { margin-right: auto; }
+
+  .js .deck-card__in {
+    animation: deck-in-row 0.8s cubic-bezier(0.22, 1, 0.36, 1) calc(120ms + var(--k) * 90ms) backwards;
+  }
+  @keyframes deck-in-row {
+    from { opacity: 0; transform: translate3d(28px, 0, 0); }
+  }
+}
+
+/* ---------- Wide screens: room beside each path for the travelling card ---------- */
+@media (min-width: 1200px) {
+  .js .intro:not([data-travel="off"]) .paths__col:first-child { padding-left: clamp(150px, 13vw, 210px); }
+  .js .intro:not([data-travel="off"]) .paths__col:last-child { padding-right: clamp(150px, 13vw, 210px); }
+}
+
+/* ---------- Hover: like spreading a hand of cards ----------
+   The hovered card lifts and turns to face you; the cards on either side
+   slide away from it so it shows in full. Nothing changes stacking order. */
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .intro[data-rest] .deck-card { pointer-events: auto; }
+  .deck-card__in {
+    --spread: calc(var(--cw) * 0.24);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .intro[data-rest] .deck-card:hover .deck-card__in {
+    transform:
+      rotateY(calc(var(--ry) * -1))
+      rotateZ(calc(var(--rz) * -1))
+      translate3d(0, calc(min(var(--cw) * 0.1, 34px) * -1), 0)
+      scale(1.03);
+  }
+  .intro[data-rest] .deck-card:hover ~ .deck-card .deck-card__in {
+    transform: translate3d(var(--spread), 0, 0);
+  }
+  .intro[data-rest] .deck-card:has(~ .deck-card:hover) .deck-card__in {
+    transform: translate3d(calc(var(--spread) * -1), 0, 0);
+  }
+}
+
+/* ---------- Hero title: two lines in every language (wide screens) ----------
+   Hero.tsx scales long translations down (--hero-fit) so the title keeps the
+   English footprint and the cards keep the same size and position. */
+@media (min-width: 900px) {
+  .hero--deck .hero__title {
+    min-height: calc(var(--fs-display) * 2.04);
+    align-content: center;
+    font-size: calc(var(--fs-display) * var(--hero-fit, 1));
+  }
+  .hero--deck .hero__line { white-space: nowrap; }
+}
